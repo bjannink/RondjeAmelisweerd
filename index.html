@@ -121,50 +121,51 @@
     .app-panel {
       position: absolute;
       z-index: 1000;
-      top: 18px;
-      left: 18px;
-      width: min(370px, calc(100vw - 36px));
-      max-height: calc(100vh - 36px);
+      top: 12px;
+      left: 12px;
+      width: min(320px, calc(100vw - 24px));
+      max-height: calc(100vh - 24px);
       overflow-y: auto;
-      padding: 20px;
+      padding: 14px;
       border: 1px solid rgba(0, 93, 185, 0.16);
-      border-top: 5px solid var(--green);
+      border-top: 4px solid var(--green);
       border-radius: 0;
       background: var(--panel);
       box-shadow: var(--shadow);
+      scrollbar-width: thin;
     }
 
     .brand-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      min-height: 46px;
-      margin-bottom: 12px;
+      gap: 10px;
+      min-height: 34px;
+      margin-bottom: 7px;
     }
 
     .ua-logo {
       display: block;
-      width: min(215px, 69%);
+      width: min(165px, 66%);
       height: auto;
     }
 
     .brand-badge {
       flex: 0 0 auto;
-      padding: 3px 0 3px 9px;
-      border-left: 3px solid var(--orange);
+      padding: 2px 0 2px 7px;
+      border-left: 2px solid var(--orange);
       color: var(--green-dark);
       background: transparent;
-      font-size: 0.65rem;
+      font-size: 0.56rem;
       font-weight: 850;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
     .eyebrow {
-      margin: 0 0 5px;
+      margin: 0 0 3px;
       color: var(--orange);
-      font-size: 0.72rem;
+      font-size: 0.62rem;
       font-weight: 850;
       letter-spacing: 0.13em;
       text-transform: uppercase;
@@ -172,39 +173,39 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(1.7rem, 5vw, 2.2rem);
+      font-size: 1.52rem;
       font-weight: 900;
       line-height: 1.02;
       letter-spacing: -0.04em;
     }
 
     .intro {
-      margin: 9px 0 17px;
-      padding-bottom: 15px;
+      margin: 5px 0 10px;
+      padding-bottom: 9px;
       border-bottom: 1px solid var(--line);
       color: var(--muted);
-      font-size: 0.89rem;
-      line-height: 1.45;
+      font-size: 0.76rem;
+      line-height: 1.35;
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 11px;
+      gap: 8px;
     }
 
     .field {
       display: flex;
       flex-direction: column;
       min-width: 0;
-      gap: 5px;
+      gap: 3px;
     }
 
     .field.full { grid-column: 1 / -1; }
 
     label, .field-label {
       color: #293f56;
-      font-size: 0.75rem;
+      font-size: 0.68rem;
       font-weight: 750;
     }
 
@@ -215,13 +216,14 @@
 
     input[type="number"] {
       width: 100%;
-      height: 42px;
-      padding: 0 48px 0 11px;
+      height: 35px;
+      padding: 0 42px 0 9px;
       border: 1px solid #bfd0df;
       border-radius: 0;
       outline: none;
       color: var(--ink);
       background: #fff;
+      font-size: 0.82rem;
       transition: border-color 150ms, box-shadow 150ms;
     }
 
@@ -233,9 +235,9 @@
     .suffix {
       position: absolute;
       top: 50%;
-      right: 11px;
+      right: 9px;
       color: #71808d;
-      font-size: 0.78rem;
+      font-size: 0.68rem;
       transform: translateY(-50%);
       pointer-events: none;
     }
@@ -243,7 +245,7 @@
     .mode-options {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 7px;
+      gap: 5px;
     }
 
     .radio-card { position: relative; }
@@ -255,15 +257,15 @@
 
     .radio-card span {
       display: flex;
-      min-height: 46px;
+      min-height: 38px;
       align-items: center;
       justify-content: center;
-      padding: 7px 8px;
+      padding: 5px 6px;
       border: 1px solid #bfd0df;
       border-radius: 0;
       color: #43566a;
       background: #fff;
-      font-size: 0.78rem;
+      font-size: 0.69rem;
       font-weight: 700;
       line-height: 1.2;
       text-align: center;
@@ -280,15 +282,16 @@
     .actions {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
-      gap: 8px;
-      margin-top: 14px;
+      gap: 6px;
+      margin-top: 9px;
     }
 
     button {
-      min-height: 43px;
+      min-height: 36px;
       border: 0;
       border-radius: 0;
       font-weight: 800;
+      font-size: 0.79rem;
       cursor: pointer;
       transition: transform 120ms, opacity 120ms, background 120ms;
     }
@@ -298,7 +301,7 @@
     button:disabled { cursor: wait; opacity: 0.58; }
 
     #searchButton {
-      padding: 0 18px;
+      padding: 0 13px;
       color: white;
       background: var(--orange);
     }
@@ -306,7 +309,7 @@
     #searchButton:hover:not(:disabled) { background: #b90018; }
 
     #clearButton {
-      padding: 0 14px;
+      padding: 0 10px;
       color: var(--green-dark);
       background: var(--green-soft);
     }
@@ -314,22 +317,22 @@
     .status {
       display: flex;
       align-items: flex-start;
-      gap: 8px;
-      margin-top: 13px;
-      padding: 10px 11px;
+      gap: 6px;
+      margin-top: 8px;
+      padding: 7px 8px;
       border-left: 3px solid var(--green);
       border-radius: 0;
       color: #405b72;
       background: #edf5f8;
-      font-size: 0.78rem;
-      line-height: 1.35;
+      font-size: 0.68rem;
+      line-height: 1.3;
     }
 
     .status::before {
       flex: 0 0 auto;
-      width: 8px;
-      height: 8px;
-      margin-top: 3px;
+      width: 7px;
+      height: 7px;
+      margin-top: 2px;
       border-radius: 50%;
       background: #7892a8;
       content: "";
@@ -350,14 +353,14 @@
 
     .results {
       display: grid;
-      gap: 8px;
-      margin-top: 12px;
+      gap: 6px;
+      margin-top: 8px;
     }
 
     .route-card {
       width: 100%;
       min-height: 0;
-      padding: 11px 12px;
+      padding: 8px 9px;
       border: 1px solid var(--line);
       border-left: 5px solid var(--route-color);
       border-radius: 0;
@@ -378,22 +381,22 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 6px;
-      font-size: 0.88rem;
+      margin-bottom: 4px;
+      font-size: 0.78rem;
       font-weight: 850;
     }
 
     .route-distance {
       color: var(--route-color);
-      font-size: 0.82rem;
+      font-size: 0.73rem;
     }
 
     .route-meta {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 3px 10px;
+      gap: 2px 8px;
       color: var(--muted);
-      font-size: 0.75rem;
+      font-size: 0.67rem;
       font-weight: 600;
       line-height: 1.35;
     }
@@ -456,15 +459,22 @@
     @media (max-width: 640px) {
       .app-panel {
         top: auto;
-        bottom: 10px;
-        left: 10px;
-        width: calc(100vw - 20px);
-        max-height: min(64vh, 570px);
-        padding: 15px;
+        bottom: 6px;
+        left: 6px;
+        width: calc(100vw - 12px);
+        max-height: 48vh;
+        padding: 10px;
         border-radius: 0;
       }
 
-      .intro { margin-bottom: 12px; }
+      .brand-row {
+        min-height: 30px;
+        margin-bottom: 4px;
+      }
+
+      .ua-logo { width: min(145px, 64%); }
+      .intro { display: none; }
+      h1 { margin-bottom: 8px; font-size: 1.35rem; }
       .map-key { display: none; }
       .map-warning { top: 76px; }
       .leaflet-control-attribution { max-width: 55vw; font-size: 9px; }
