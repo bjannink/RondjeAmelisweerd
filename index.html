@@ -357,6 +357,30 @@
       margin-top: 8px;
     }
 
+    .mobile-results-header { display: none; }
+
+    .results-heading {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 850;
+    }
+
+    .results-summary {
+      display: block;
+      margin-top: 1px;
+      color: var(--muted);
+      font-size: 0.66rem;
+    }
+
+    #backButton {
+      min-height: 30px;
+      padding: 0 9px;
+      border: 1px solid var(--green);
+      color: var(--green-dark);
+      background: #fff;
+      font-size: 0.7rem;
+    }
+
     .route-card {
       width: 100%;
       min-height: 0;
@@ -462,19 +486,45 @@
         bottom: 6px;
         left: 6px;
         width: calc(100vw - 12px);
-        max-height: 48vh;
+        max-height: 44vh;
         padding: 10px;
         border-radius: 0;
       }
 
       .brand-row {
-        min-height: 30px;
-        margin-bottom: 4px;
+        min-height: 24px;
+        margin-bottom: 2px;
       }
 
-      .ua-logo { width: min(145px, 64%); }
+      .ua-logo { width: min(118px, 55%); }
+      .brand-badge, .eyebrow { display: none; }
       .intro { display: none; }
-      h1 { margin-bottom: 8px; font-size: 1.35rem; }
+      h1 { margin-bottom: 6px; font-size: 1.18rem; }
+
+      .app-panel:not(.results-mode) .results-view { display: none; }
+
+      .app-panel.results-mode {
+        max-height: 44vh;
+        padding: 8px;
+      }
+
+      .app-panel.results-mode > .brand-row,
+      .app-panel.results-mode > .eyebrow,
+      .app-panel.results-mode > h1,
+      .app-panel.results-mode > .search-view {
+        display: none;
+      }
+
+      .mobile-results-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .app-panel.results-mode .results { margin-top: 6px; }
       .map-key { display: none; }
       .map-warning { top: 76px; }
       .leaflet-control-attribution { max-width: 55vw; font-size: 9px; }
@@ -495,6 +545,7 @@
     </div>
     <p class="eyebrow">Hardlopen in Amelisweerd</p>
     <h1>Rondje Amelisweerd</h1>
+    <section class="search-view" aria-label="Routevoorwaarden">
     <p class="intro">Kies je start, stel je afstand in en vind een trainingsronde die bij je past.</p>
 
     <div class="form-grid">
@@ -543,7 +594,18 @@
     </div>
 
     <div id="status" class="status loading" role="status" aria-live="polite">Netwerk wordt geladen…</div>
-    <section id="results" class="results" aria-label="Gevonden rondjes"></section>
+    </section>
+
+    <section class="results-view" aria-label="Gevonden rondjes">
+      <div class="mobile-results-header">
+        <div>
+          <p class="results-heading">Gevonden rondjes</p>
+          <span id="resultsSummary" class="results-summary"></span>
+        </div>
+        <button id="backButton" type="button">← Terug</button>
+      </div>
+      <section id="results" class="results"></section>
+    </section>
   </main>
 
   <aside class="map-key" aria-label="Kaartlegenda">
@@ -599,11 +661,26 @@
     const resultsElement = document.getElementById("results");
     const searchButton = document.getElementById("searchButton");
     const clearButton = document.getElementById("clearButton");
+    const backButton = document.getElementById("backButton");
+    const resultsSummaryElement = document.getElementById("resultsSummary");
+    const appPanel = document.querySelector(".app-panel");
     const mapWarningElement = document.getElementById("mapWarning");
 
     function setStatus(message, type = "") {
       statusElement.textContent = message;
       statusElement.className = `status ${type}`.trim();
+    }
+
+    function showSearchView() {
+      appPanel.classList.remove("results-mode");
+      appPanel.scrollTop = 0;
+    }
+
+    function showResultsView(routeCount) {
+      resultsSummaryElement.textContent =
+        `${routeCount} ${routeCount === 1 ? "rondje" : "rondjes"} — tik om te selecteren`;
+      appPanel.classList.add("results-mode");
+      appPanel.scrollTop = 0;
     }
 
     function validCoordinate(coord) {
@@ -1696,6 +1773,7 @@
       currentRoutes = routes;
 
       if (!routes.length) {
+        showSearchView();
         setStatus(
           "Geen rondje binnen de tolerantie en maximaal 35% overlap gevonden. " +
           "Probeer een grotere tolerantie, zoekstraal of afstand.",
@@ -1722,7 +1800,10 @@
           lineCap: "round",
           lineJoin: "round"
         }).addTo(map);
-        line.on("click", () => selectRoute(index));
+        line.on("click", () => {
+          showResultsView(routes.length);
+          selectRoute(index);
+        });
         routeLayers.push({ halo, line });
 
         const card = document.createElement("button");
@@ -1749,10 +1830,12 @@
         "Klik op een resultaat om het te bekijken.",
         "ready"
       );
+      showResultsView(routes.length);
       selectRoute(0);
     }
 
     function clearSelection(clearClick = true) {
+      showSearchView();
       clearRouteLayers();
       resultsElement.innerHTML = "";
       currentRoutes = [];
@@ -1882,6 +1965,7 @@
     }
 
     async function handleSearch() {
+      showSearchView();
       if (!appReady) {
         setStatus("Het netwerk is nog niet gereed.", "error");
         return;
@@ -1999,6 +2083,10 @@
 
     searchButton.addEventListener("click", handleSearch);
     clearButton.addEventListener("click", () => clearSelection(true));
+    backButton.addEventListener("click", () => {
+      showSearchView();
+      setStatus("Pas de voorwaarden aan en zoek opnieuw.", "ready");
+    });
     initializeMap();
     loadNetwork();
   </script>
