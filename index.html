@@ -203,6 +203,49 @@
 
     .field.full { grid-column: 1 / -1; }
 
+    .form-grid:not(.show-advanced) .advanced-field { display: none; }
+
+    .advanced-toggle {
+      width: 100%;
+      min-height: 30px;
+      margin-top: 7px;
+      border: 1px solid var(--line);
+      color: var(--green-dark);
+      background: #fff;
+      font-size: 0.68rem;
+      text-align: left;
+      padding: 0 8px;
+    }
+
+    .point-steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      grid-column: 1 / -1;
+    }
+
+    .point-step {
+      min-height: 34px;
+      padding: 5px 7px;
+      border: 1px solid #bfd0df;
+      color: #43566a;
+      background: #fff;
+      font-size: 0.68rem;
+      font-weight: 750;
+      text-align: left;
+    }
+
+    .point-step.active {
+      border-color: var(--orange);
+      box-shadow: inset 3px 0 0 var(--orange);
+    }
+
+    .point-step.complete {
+      border-color: var(--green);
+      color: var(--green-dark);
+      background: var(--green-soft);
+    }
+
     label, .field-label {
       color: #293f56;
       font-size: 0.68rem;
@@ -227,6 +270,8 @@
       transition: border-color 150ms, box-shadow 150ms;
     }
 
+    .input-wrap.no-suffix input { padding-right: 9px; }
+
     input[type="number"]:focus {
       border-color: var(--green);
       box-shadow: 0 0 0 3px rgba(0, 93, 185, 0.13);
@@ -247,6 +292,8 @@
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 5px;
     }
+
+    .route-type-options .radio-card span { min-height: 32px; }
 
     .radio-card { position: relative; }
     .radio-card input {
@@ -277,6 +324,31 @@
       color: var(--green-dark);
       background: var(--green-soft);
       box-shadow: inset 0 0 0 1px var(--green);
+    }
+
+    .check-option {
+      display: flex;
+      min-height: 30px;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 8px;
+      border: 1px solid #bfd0df;
+      color: #293f56;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .check-option input {
+      width: 15px;
+      height: 15px;
+      margin: 0;
+      accent-color: var(--green);
+    }
+
+    .check-option small {
+      color: var(--muted);
+      font-size: 0.64rem;
+      font-weight: 600;
     }
 
     .actions {
@@ -381,6 +453,68 @@
       font-size: 0.7rem;
     }
 
+    .hidden { display: none !important; }
+
+    .edit-actions {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .edit-actions.previewing {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .edit-actions.previewing .normal-edit-action { display: none; }
+    .edit-actions:not(.previewing) .preview-edit-action { display: none; }
+
+    #confirmEditButton {
+      border-color: var(--green-dark);
+      color: #fff;
+      background: var(--green);
+    }
+
+    .edit-actions button {
+      min-height: 30px;
+      padding: 0 8px;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: #fff;
+      font-size: 0.68rem;
+    }
+
+    .edit-actions button:disabled {
+      color: #87939d;
+      background: #eef1f2;
+      cursor: default;
+    }
+
+    #editRouteButton.active {
+      border-color: var(--green-dark);
+      color: #fff;
+      background: var(--green);
+    }
+
+    .edit-hint {
+      margin-top: 5px;
+      padding: 5px 7px;
+      border-left: 3px solid var(--orange);
+      color: #4e5962;
+      background: #fff5ed;
+      font-size: 0.66rem;
+      line-height: 1.3;
+    }
+
+    .edit-handle {
+      width: 16px;
+      height: 16px;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.55);
+    }
+
     .route-card {
       width: 100%;
       min-height: 0;
@@ -466,7 +600,7 @@
     .key-area { width: 20px; height: 9px; border: 1px solid var(--green); background: rgba(88, 144, 219, 0.16); }
     .key-click { width: 9px; height: 9px; border: 2px solid #fff; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 1px var(--orange); }
 
-    .search-pin, .start-pin {
+    .search-pin, .start-pin, .end-search-pin, .end-pin {
       display: grid;
       width: 24px !important;
       height: 24px !important;
@@ -477,8 +611,26 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
     }
 
+    .search-pin, .end-search-pin {
+      color: #fff;
+      font-size: 0.67rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
     .search-pin { background: var(--orange); }
     .start-pin { background: var(--green); }
+    .end-search-pin { background: #005db9; }
+    .end-pin { background: #243f59; }
+    .waypoint-pin {
+      width: 14px !important;
+      height: 14px !important;
+      margin: -7px 0 0 -7px !important;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+    }
 
     @media (max-width: 640px) {
       .app-panel {
@@ -525,9 +677,16 @@
       }
 
       .app-panel.results-mode .results { margin-top: 6px; }
+      .app-panel.results-mode .edit-actions { margin-top: 5px; }
+      .app-panel.results-mode .route-card:not(.selected) .route-meta { display: none; }
+      .app-panel.results-mode .route-card { padding: 6px 8px; }
       .map-key { display: none; }
       .map-warning { top: 76px; }
       .leaflet-control-attribution { max-width: 55vw; font-size: 9px; }
+    }
+
+    .app-panel.editing-route .route-card:not(.selected) {
+      display: none;
     }
   </style>
 </head>
@@ -544,12 +703,40 @@
       <span class="brand-badge">Routemaker</span>
     </div>
     <p class="eyebrow">Hardlopen in Amelisweerd</p>
-    <h1>Rondje Amelisweerd</h1>
+    <h1 id="pageTitle">Rondje Amelisweerd</h1>
     <section class="search-view" aria-label="Routevoorwaarden">
-    <p class="intro">Kies je start, stel je afstand in en vind een trainingsronde die bij je past.</p>
+    <p id="introText" class="intro">Kies je start, stel je afstand in en vind een trainingsronde die bij je past.</p>
 
     <div class="form-grid">
-      <div class="field">
+      <div class="field full">
+        <span class="field-label">Soort route</span>
+        <div class="mode-options route-type-options">
+          <label class="radio-card">
+            <input type="radio" name="routeType" value="loop" checked>
+            <span>Rondje</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="routeType" value="pointToPoint">
+            <span>A → B</span>
+          </label>
+        </div>
+      </div>
+
+      <div id="abPreferenceField" class="field full hidden">
+        <span class="field-label">A → B-route</span>
+        <div class="mode-options">
+          <label class="radio-card">
+            <input type="radio" name="abPreference" value="shortest" checked>
+            <span>Kortste route</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="abPreference" value="distance">
+            <span>Gewenste afstand</span>
+          </label>
+        </div>
+      </div>
+
+      <div id="distanceField" class="field">
         <label for="distanceInput">Doelafstand</label>
         <div class="input-wrap">
           <input id="distanceInput" type="number" min="200" max="30000" step="100" value="1000">
@@ -557,7 +744,7 @@
         </div>
       </div>
 
-      <div class="field">
+      <div id="toleranceField" class="field advanced-field">
         <label for="toleranceInput">Tolerantie</label>
         <div class="input-wrap">
           <input id="toleranceInput" type="number" min="1" max="80" step="1" value="15">
@@ -565,7 +752,7 @@
         </div>
       </div>
 
-      <div class="field full">
+      <div id="startModeField" class="field full advanced-field">
         <span class="field-label">Startpunt</span>
         <div class="mode-options">
           <label class="radio-card">
@@ -579,14 +766,35 @@
         </div>
       </div>
 
-      <div class="field full">
+      <div class="field full advanced-field">
+        <label class="check-option" for="allowOverlapInput">
+          <input id="allowOverlapInput" type="checkbox" checked>
+          <span>Dubbele trajectdelen toestaan <small>max. 35%</small></span>
+        </label>
+      </div>
+
+      <div id="radiusField" class="field advanced-field">
         <label for="radiusInput">Zoekstraal bij vrije start</label>
         <div class="input-wrap">
           <input id="radiusInput" type="number" min="25" max="2000" step="25" value="250">
           <span class="suffix">meter</span>
         </div>
       </div>
+
+      <div class="field advanced-field">
+        <label id="resultCountLabel" for="resultCountInput">Maximaal aantal rondjes</label>
+        <div class="input-wrap no-suffix">
+          <input id="resultCountInput" type="number" min="1" max="10" step="1" value="6">
+        </div>
+      </div>
+
+      <div id="pointToPointSteps" class="point-steps hidden">
+        <button id="chooseAButton" class="point-step active" type="button">1. Kies A</button>
+        <button id="chooseBButton" class="point-step" type="button">2. Kies B</button>
+      </div>
     </div>
+
+    <button id="advancedToggle" class="advanced-toggle" type="button" aria-expanded="false">Meer opties ▾</button>
 
     <div class="actions">
       <button id="searchButton" type="button" disabled>Zoek rondjes</button>
@@ -596,22 +804,29 @@
     <div id="status" class="status loading" role="status" aria-live="polite">Netwerk wordt geladen…</div>
     </section>
 
-    <section class="results-view" aria-label="Gevonden rondjes">
+    <section class="results-view" aria-label="Gevonden routes">
       <div class="mobile-results-header">
         <div>
-          <p class="results-heading">Gevonden rondjes</p>
+          <p id="resultsHeading" class="results-heading">Gevonden rondjes</p>
           <span id="resultsSummary" class="results-summary"></span>
         </div>
         <button id="backButton" type="button">← Terug</button>
       </div>
+      <div id="editActions" class="edit-actions hidden">
+        <button id="editRouteButton" class="normal-edit-action" type="button">Route aanpassen</button>
+        <button id="undoEditButton" class="normal-edit-action" type="button" disabled>Ongedaan</button>
+        <button id="resetEditButton" class="normal-edit-action" type="button" disabled>Herstel</button>
+        <button id="confirmEditButton" class="preview-edit-action" type="button">Bevestig wijziging</button>
+        <button id="cancelEditButton" class="preview-edit-action" type="button">Annuleer</button>
+      </div>
+      <div id="editHint" class="edit-hint hidden" role="status" aria-live="polite"></div>
       <section id="results" class="results"></section>
     </section>
   </main>
 
   <aside class="map-key" aria-label="Kaartlegenda">
-    <div class="key-row"><span class="key-line"></span> Paden en wegen</div>
-    <div class="key-row"><span class="key-area"></span> Beloopbaar vlak</div>
-    <div class="key-row"><span class="key-click"></span> Kaartklik</div>
+    <div class="key-row"><span class="key-line"></span> Routenetwerk</div>
+    <div class="key-row"><span class="key-click"></span> Gekozen kaartpunt</div>
   </aside>
   <div id="mapWarning" class="map-warning" role="alert"></div>
 
@@ -624,18 +839,39 @@
     "use strict";
 
     const CONFIG = Object.freeze({
-      mergeDistance: 2,
-      intersectionSnapDistance: 2,
-      polygonAccessDistance: 10,
-      polygonSampleDistance: 5,
       defaultSearchRadius: 250,
       maxOverlap: 0.35,
       overlapPenalties: [3, 6, 12, 25],
       maxRouteCalculations: 150,
-      maxResults: 3
+      maxResults: 10,
+      maxPointSnapDistance: 250
     });
 
-    const ROUTE_COLORS = ["#dd001c", "#005db9", "#d5a900"];
+    const ROUTE_COLORS = [
+      "#dd001c", "#005db9", "#d5a900", "#00856a", "#7a3db8",
+      "#e56a00", "#007a8a", "#9c2f50", "#5b6f00", "#4f5d75"
+    ];
+    const INTERACTION = Object.freeze({
+      PICK_LOOP_START: "PICK_LOOP_START",
+      PICK_A: "PICK_A",
+      PICK_B: "PICK_B",
+      READY_AB: "READY_AB",
+      SEARCHING: "SEARCHING",
+      RESULTS: "RESULTS",
+      EDIT_SOURCE: "EDIT_SOURCE",
+      EDIT_TARGET: "EDIT_TARGET",
+      EDIT_PREVIEW: "EDIT_PREVIEW"
+    });
+    const appState = {
+      interaction: INTERACTION.PICK_LOOP_START,
+      points: { start: null, end: null },
+      edit: {
+        sourceEdgeIndex: null,
+        previewRoute: null,
+        previewLayer: null,
+        graphBeforePreview: null
+      }
+    };
     const numberNL = new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 });
     const decimalNL = new Intl.NumberFormat("nl-NL", {
       minimumFractionDigits: 1,
@@ -643,17 +879,27 @@
     });
 
     let map;
-    let rawGeoJson;
     let normalizedData;
+    let baseGraph;
     let graph;
-    let clickedPoint = null;
     let searchMarker = null;
+    let endSearchMarker = null;
     let actualStartMarker = null;
+    let actualEndMarker = null;
     let startConnector = null;
+    let endConnector = null;
     let routeLayers = [];
+    let waypointMarkers = [];
     let currentRoutes = [];
+    let originalRoutes = [];
+    let routeEditHistories = [];
+    let selectedRouteIndex = 0;
+    let editHitLayers = [];
+    let editSourceHighlight = null;
+    let editTargetHighlight = null;
+    let editHandleMarker = null;
+    let editHandleOrigin = null;
     let networkLayer = null;
-    let polygonLayer = null;
     let appReady = false;
     let startBasemapLoading = () => {};
 
@@ -662,9 +908,89 @@
     const searchButton = document.getElementById("searchButton");
     const clearButton = document.getElementById("clearButton");
     const backButton = document.getElementById("backButton");
+    const editActionsElement = document.getElementById("editActions");
+    const editRouteButton = document.getElementById("editRouteButton");
+    const undoEditButton = document.getElementById("undoEditButton");
+    const resetEditButton = document.getElementById("resetEditButton");
+    const confirmEditButton = document.getElementById("confirmEditButton");
+    const cancelEditButton = document.getElementById("cancelEditButton");
+    const editHintElement = document.getElementById("editHint");
     const resultsSummaryElement = document.getElementById("resultsSummary");
     const appPanel = document.querySelector(".app-panel");
     const mapWarningElement = document.getElementById("mapWarning");
+    const pageTitleElement = document.getElementById("pageTitle");
+    const introTextElement = document.getElementById("introText");
+    const abPreferenceField = document.getElementById("abPreferenceField");
+    const distanceField = document.getElementById("distanceField");
+    const toleranceField = document.getElementById("toleranceField");
+    const startModeField = document.getElementById("startModeField");
+    const radiusField = document.getElementById("radiusField");
+    const resultCountLabel = document.getElementById("resultCountLabel");
+    const resultsHeadingElement = document.getElementById("resultsHeading");
+    const formGridElement = document.querySelector(".form-grid");
+    const advancedToggle = document.getElementById("advancedToggle");
+    const pointToPointSteps = document.getElementById("pointToPointSteps");
+    const chooseAButton = document.getElementById("chooseAButton");
+    const chooseBButton = document.getElementById("chooseBButton");
+
+    function isEditingRoute() {
+      return [
+        INTERACTION.EDIT_SOURCE,
+        INTERACTION.EDIT_TARGET,
+        INTERACTION.EDIT_PREVIEW
+      ].includes(appState.interaction);
+    }
+
+    function updatePointStepDisplay() {
+      const pointToPoint = activeRouteType() === "pointToPoint";
+      pointToPointSteps.classList.toggle("hidden", !pointToPoint);
+      if (!pointToPoint) return;
+      const hasA = Boolean(appState.points.start);
+      const hasB = Boolean(appState.points.end);
+      chooseAButton.classList.toggle("complete", hasA);
+      chooseBButton.classList.toggle("complete", hasB);
+      chooseAButton.classList.toggle("active", appState.interaction === INTERACTION.PICK_A);
+      chooseBButton.classList.toggle("active", appState.interaction === INTERACTION.PICK_B);
+      chooseAButton.textContent = hasA ? "A gekozen · wijzig" : "1. Kies A";
+      chooseBButton.textContent = hasB ? "B gekozen · wijzig" : "2. Kies B";
+    }
+
+    function setInteraction(nextInteraction) {
+      appState.interaction = nextInteraction;
+      updatePointStepDisplay();
+    }
+
+    function activeRouteType() {
+      return document.querySelector('input[name="routeType"]:checked').value;
+    }
+
+    function activeAbPreference() {
+      return document.querySelector('input[name="abPreference"]:checked').value;
+    }
+
+    function updateInterfaceMode() {
+      const pointToPoint = activeRouteType() === "pointToPoint";
+      const useDesiredDistance = pointToPoint && activeAbPreference() === "distance";
+      abPreferenceField.classList.toggle("hidden", !pointToPoint);
+      startModeField.classList.toggle("hidden", pointToPoint);
+      radiusField.classList.toggle("hidden", pointToPoint);
+      distanceField.classList.toggle("hidden", pointToPoint && !useDesiredDistance);
+      toleranceField.classList.toggle("hidden", pointToPoint && !useDesiredDistance);
+      pageTitleElement.textContent = pointToPoint
+        ? "Route door Amelisweerd"
+        : "Rondje Amelisweerd";
+      introTextElement.textContent = pointToPoint
+        ? "Klik eerst punt A en daarna punt B op de kaart."
+        : "Kies je start, stel je afstand in en vind een trainingsronde die bij je past.";
+      searchButton.textContent = pointToPoint ? "Zoek routes" : "Zoek rondjes";
+      resultCountLabel.textContent = pointToPoint
+        ? "Maximaal aantal routes"
+        : "Maximaal aantal rondjes";
+      resultsHeadingElement.textContent = pointToPoint
+        ? "Gevonden routes"
+        : "Gevonden rondjes";
+      updatePointStepDisplay();
+    }
 
     function setStatus(message, type = "") {
       statusElement.textContent = message;
@@ -677,8 +1003,11 @@
     }
 
     function showResultsView(routeCount) {
+      const noun = activeRouteType() === "pointToPoint"
+        ? (routeCount === 1 ? "route" : "routes")
+        : (routeCount === 1 ? "rondje" : "rondjes");
       resultsSummaryElement.textContent =
-        `${routeCount} ${routeCount === 1 ? "rondje" : "rondjes"} — tik om te selecteren`;
+        `${routeCount} ${noun} — tik om te selecteren`;
       appPanel.classList.add("results-mode");
       appPanel.scrollTop = 0;
     }
@@ -764,7 +1093,7 @@
         invalidFeatures
       };
 
-      console.group("Analyse paden.geojson");
+      console.group("Analyse Edge.geojson");
       console.log("Totaal aantal features:", report.totalFeatures);
       console.log("Aantal LineStrings:", report.lineStrings);
       console.log("Aantal MultiLineStrings:", report.multiLineStrings);
@@ -780,9 +1109,87 @@
       return report;
     }
 
+    function inspectEdgeTopology(geojson) {
+      const edgeIds = new Set();
+      const nodeCoordinates = new Map();
+      const endpointByCoordinate = new Map();
+      const errors = [];
+
+      const registerNode = (nodeId, coord, edgeId, role) => {
+        if (nodeId === undefined || nodeId === null || !validCoordinate(coord)) {
+          errors.push({ edgeId, role, reason: "node-ID of coördinaat ontbreekt" });
+          return;
+        }
+        const key = coordinateKey(coord);
+        if (nodeCoordinates.has(nodeId) && nodeCoordinates.get(nodeId) !== key) {
+          errors.push({ edgeId, role, nodeId, reason: "node-ID heeft meerdere coördinaten" });
+          return;
+        }
+        nodeCoordinates.set(nodeId, key);
+        endpointByCoordinate.set(key, nodeId);
+      };
+
+      geojson.features.forEach((feature, featureIndex) => {
+        const properties = feature && feature.properties ? feature.properties : {};
+        const coordinates = feature && feature.geometry && feature.geometry.coordinates;
+        const edgeId = properties._edge_id;
+        if (edgeId === undefined || edgeId === null) {
+          errors.push({ featureIndex, reason: "_edge_id ontbreekt" });
+        } else if (edgeIds.has(edgeId)) {
+          errors.push({ featureIndex, edgeId, reason: "dubbele _edge_id" });
+        } else {
+          edgeIds.add(edgeId);
+        }
+        if (feature && feature.geometry && feature.geometry.type === "LineString" &&
+            Array.isArray(coordinates) && coordinates.length >= 2) {
+          registerNode(properties._from_node, coordinates[0], edgeId, "from");
+          registerNode(properties._to_node, coordinates[coordinates.length - 1], edgeId, "to");
+        }
+      });
+
+      let internalNodeOccurrences = 0;
+      const internalNodeIds = new Set();
+      geojson.features.forEach(feature => {
+        if (!feature || !feature.geometry || feature.geometry.type !== "LineString") return;
+        const coordinates = feature.geometry.coordinates;
+        for (let index = 1; index < coordinates.length - 1; index++) {
+          const nodeId = endpointByCoordinate.get(coordinateKey(coordinates[index]));
+          if (nodeId !== undefined) {
+            internalNodeOccurrences++;
+            internalNodeIds.add(nodeId);
+          }
+        }
+      });
+
+      const report = {
+        edges: edgeIds.size,
+        derivedNodes: nodeCoordinates.size,
+        internalNodeOccurrences,
+        internalNodes: internalNodeIds.size,
+        errors
+      };
+      console.group("Controle FME-edge-topologie");
+      console.log("Unieke edges:", report.edges);
+      console.log("Uit eindpunten afgeleide nodes:", report.derivedNodes);
+      console.log(
+        "Nodecoördinaten die als intern vormpunt op een andere edge liggen:",
+        report.internalNodes
+      );
+      if (report.internalNodes) {
+        console.warn(
+          "Deze punten worden niet automatisch verbonden; alleen _from_node en _to_node bepalen de graaf."
+        );
+      }
+      console.log("Topologiefouten:", report.errors);
+      console.groupEnd();
+      if (errors.length) {
+        throw new Error(`Edge.geojson bevat ${errors.length} topologiefout(en).`);
+      }
+      return report;
+    }
+
     function normalizeGeoJson(geojson) {
       const lines = [];
-      const polygons = [];
       const unsupported = [];
 
       geojson.features.forEach((feature, featureIndex) => {
@@ -792,7 +1199,9 @@
 
         if (geometry.type === "LineString" && hasValidLine(geometry.coordinates)) {
           lines.push({
-            id: `line-${featureIndex}`,
+            id: properties._edge_id === undefined
+              ? `line-${featureIndex}`
+              : `edge-${properties._edge_id}`,
             sourceFeatureIndex: featureIndex,
             coordinates: geometry.coordinates.map(c => [Number(c[0]), Number(c[1])]),
             properties
@@ -807,31 +1216,18 @@
               properties
             });
           });
-        } else if (geometry.type === "Polygon" && hasValidPolygon(geometry.coordinates)) {
-          polygons.push(turf.feature(
-            { type: "Polygon", coordinates: geometry.coordinates },
-            { ...properties, _sourceFeatureIndex: featureIndex }
-          ));
-        } else if (geometry.type === "MultiPolygon" && Array.isArray(geometry.coordinates)) {
-          geometry.coordinates.forEach((coords, partIndex) => {
-            if (!hasValidPolygon(coords)) return;
-            polygons.push(turf.feature(
-              { type: "Polygon", coordinates: coords },
-              { ...properties, _sourceFeatureIndex: featureIndex, _partIndex: partIndex }
-            ));
-          });
         } else {
           unsupported.push({ featureIndex, type: geometry.type });
         }
       });
 
       console.log(
-        `Normalisatie: ${lines.length} lijnobjecten en ${polygons.length} polygonen.`
+        `Normalisatie: ${lines.length} lijnobjecten.`
       );
       if (unsupported.length) {
         console.warn("Niet bruikbare features zijn overgeslagen:", unsupported);
       }
-      return { lines, polygons, unsupported };
+      return { lines, unsupported };
     }
 
     function propertyValue(properties, ...names) {
@@ -843,184 +1239,8 @@
       return "";
     }
 
-    function positiveTag(value) {
-      return ["yes", "true", "1"].includes(String(value).toLowerCase());
-    }
-
-    function gradeSignature(properties) {
-      const rawLayer = propertyValue(properties, "layer");
-      const layer = rawLayer === "" ? 0 : Number(rawLayer);
-      return {
-        layer: Number.isFinite(layer) ? layer : 0,
-        explicitLayer: rawLayer !== "",
-        bridge: positiveTag(propertyValue(properties, "bridge")),
-        tunnel: positiveTag(propertyValue(properties, "tunnel"))
-      };
-    }
-
-    function canConnectAtCrossing(segmentA, segmentB) {
-      const a = gradeSignature(segmentA.properties);
-      const b = gradeSignature(segmentB.properties);
-      if ((a.explicitLayer || b.explicitLayer) && a.layer !== b.layer) return false;
-      if (a.bridge !== b.bridge && (a.bridge || b.bridge)) return false;
-      if (a.tunnel !== b.tunnel && (a.tunnel || b.tunnel)) return false;
-      if ((a.bridge && b.tunnel) || (a.tunnel && b.bridge)) return false;
-      return true;
-    }
-
     function coordinateKey(coord, precision = 8) {
       return `${Number(coord[0]).toFixed(precision)},${Number(coord[1]).toFixed(precision)}`;
-    }
-
-    function addSplitPoint(segment, coord) {
-      if (!validCoordinate(coord)) return;
-      const total = turf.distance(segment.a, segment.b, { units: "meters" });
-      if (total < 0.01) return;
-      const along = turf.distance(segment.a, coord, { units: "meters" });
-      const t = Math.max(0, Math.min(1, along / total));
-      if (!segment.splits.some(split => Math.abs(split.t - t) < 1e-7)) {
-        segment.splits.push({ t, coord: [Number(coord[0]), Number(coord[1])] });
-      }
-    }
-
-    function splitLinesAtIntersections(lines) {
-      const segments = [];
-      lines.forEach(line => {
-        for (let i = 0; i < line.coordinates.length - 1; i++) {
-          const a = line.coordinates[i];
-          const b = line.coordinates[i + 1];
-          if (turf.distance(a, b, { units: "meters" }) < 0.05) continue;
-          segments.push({
-            id: segments.length,
-            sourceId: line.id,
-            segmentIndex: i,
-            a,
-            b,
-            properties: line.properties,
-            splits: [{ t: 0, coord: a }, { t: 1, coord: b }]
-          });
-        }
-      });
-
-      const cellSize = 0.001;
-      const spatialCells = new Map();
-      segments.forEach(segment => {
-        const minX = Math.min(segment.a[0], segment.b[0]);
-        const maxX = Math.max(segment.a[0], segment.b[0]);
-        const minY = Math.min(segment.a[1], segment.b[1]);
-        const maxY = Math.max(segment.a[1], segment.b[1]);
-        const x0 = Math.floor(minX / cellSize);
-        const x1 = Math.floor(maxX / cellSize);
-        const y0 = Math.floor(minY / cellSize);
-        const y1 = Math.floor(maxY / cellSize);
-        for (let x = x0; x <= x1; x++) {
-          for (let y = y0; y <= y1; y++) {
-            const key = `${x}:${y}`;
-            if (!spatialCells.has(key)) spatialCells.set(key, []);
-            spatialCells.get(key).push(segment.id);
-          }
-        }
-      });
-
-      const checkedPairs = new Set();
-      let exactIntersections = 0;
-      let nearConnections = 0;
-
-      for (const ids of spatialCells.values()) {
-        for (let i = 0; i < ids.length; i++) {
-          for (let j = i + 1; j < ids.length; j++) {
-            const low = Math.min(ids[i], ids[j]);
-            const high = Math.max(ids[i], ids[j]);
-            const pairKey = `${low}:${high}`;
-            if (checkedPairs.has(pairKey)) continue;
-            checkedPairs.add(pairKey);
-
-            const a = segments[low];
-            const b = segments[high];
-            if (a.sourceId === b.sourceId &&
-                Math.abs(a.segmentIndex - b.segmentIndex) <= 1) continue;
-            if (!canConnectAtCrossing(a, b)) continue;
-
-            const lineA = turf.lineString([a.a, a.b]);
-            const lineB = turf.lineString([b.a, b.b]);
-            const intersections = turf.lineIntersect(lineA, lineB);
-            intersections.features.forEach(point => {
-              const coord = point.geometry.coordinates;
-              addSplitPoint(a, coord);
-              addSplitPoint(b, coord);
-              exactIntersections++;
-            });
-
-            for (const endpoint of [a.a, a.b]) {
-              const nearest = turf.nearestPointOnLine(lineB, turf.point(endpoint), {
-                units: "kilometers"
-              });
-              const distance = Number(nearest.properties.dist) * 1000;
-              if (distance <= CONFIG.intersectionSnapDistance &&
-                  distance > 0.02 &&
-                  Number(nearest.properties.location) > 0.002 &&
-                  Number(nearest.properties.location) <
-                    turf.length(lineB, { units: "kilometers" }) - 0.002) {
-                addSplitPoint(a, endpoint);
-                addSplitPoint(b, nearest.geometry.coordinates);
-                nearConnections++;
-              }
-            }
-
-            for (const endpoint of [b.a, b.b]) {
-              const nearest = turf.nearestPointOnLine(lineA, turf.point(endpoint), {
-                units: "kilometers"
-              });
-              const distance = Number(nearest.properties.dist) * 1000;
-              if (distance <= CONFIG.intersectionSnapDistance &&
-                  distance > 0.02 &&
-                  Number(nearest.properties.location) > 0.002 &&
-                  Number(nearest.properties.location) <
-                    turf.length(lineA, { units: "kilometers" }) - 0.002) {
-                addSplitPoint(b, endpoint);
-                addSplitPoint(a, nearest.geometry.coordinates);
-                nearConnections++;
-              }
-            }
-          }
-        }
-      }
-
-      const splitSegments = [];
-      segments.forEach(segment => {
-        segment.splits.sort((a, b) => a.t - b.t);
-        const unique = [];
-        segment.splits.forEach(split => {
-          if (!unique.length ||
-              turf.distance(unique[unique.length - 1].coord, split.coord, {
-                units: "meters"
-              }) > 0.03) {
-            unique.push(split);
-          }
-        });
-
-        for (let i = 0; i < unique.length - 1; i++) {
-          const start = unique[i].coord;
-          const end = unique[i + 1].coord;
-          const length = turf.distance(start, end, { units: "meters" });
-          if (length < 0.05) continue;
-          splitSegments.push({
-            a: start,
-            b: end,
-            length,
-            sourceId: segment.sourceId,
-            properties: segment.properties,
-            virtual: false
-          });
-        }
-      });
-
-      console.log(
-        `Kruispuntsplitsing: ${segments.length} bronsegmenten → ` +
-        `${splitSegments.length} segmenten; ${exactIntersections} exacte en ` +
-        `${nearConnections} nabije aansluitingen gevonden.`
-      );
-      return splitSegments;
     }
 
     function createEmptyGraph(referenceLatitude) {
@@ -1035,39 +1255,25 @@
       };
     }
 
-    function projectedMeters(coord, referenceLatitude) {
-      const radians = referenceLatitude * Math.PI / 180;
-      return [
-        coord[0] * 111320 * Math.cos(radians),
-        coord[1] * 110540
-      ];
-    }
-
-    function addGraphNode(targetGraph, coord, mergeDistance = CONFIG.mergeDistance) {
-      const projected = projectedMeters(coord, targetGraph.referenceLatitude);
-      const size = Math.max(mergeDistance, 0.5);
-      const cellX = Math.floor(projected[0] / size);
-      const cellY = Math.floor(projected[1] / size);
-
-      for (let dx = -1; dx <= 1; dx++) {
-        for (let dy = -1; dy <= 1; dy++) {
-          const bucket = targetGraph.nodeGrid.get(`${cellX + dx}:${cellY + dy}`) || [];
-          for (const nodeId of bucket) {
-            const node = targetGraph.nodes[nodeId];
-            if (turf.distance(node.coord, coord, { units: "meters" }) <= mergeDistance) {
-              return nodeId;
-            }
-          }
-        }
-      }
-
-      const id = targetGraph.nodes.length;
-      targetGraph.nodes.push({ id, coord: [Number(coord[0]), Number(coord[1])] });
-      targetGraph.adjacency.push([]);
-      const key = `${cellX}:${cellY}`;
-      if (!targetGraph.nodeGrid.has(key)) targetGraph.nodeGrid.set(key, []);
-      targetGraph.nodeGrid.get(key).push(id);
-      return id;
+    function cloneRoutingGraph(source) {
+      const cloned = createEmptyGraph(source.referenceLatitude);
+      cloned.nodes = source.nodes.map(node => ({
+        ...node,
+        coord: [...node.coord]
+      }));
+      cloned.adjacency = cloned.nodes.map(() => []);
+      cloned.baseEdges = source.baseEdges.map(base => ({
+        ...base,
+        coordinates: base.coordinates.map(coord => [...coord]),
+        properties: { ...(base.properties || {}) }
+      }));
+      cloned.edges = source.edges.map(edge => ({
+        ...edge,
+        properties: { ...(edge.properties || {}) }
+      }));
+      cloned.edges.forEach(edge => cloned.adjacency[edge.from].push(edge));
+      cloned.cyclicCore = new Set(source.cyclicCore);
+      return cloned;
     }
 
     function walkingDirection(properties) {
@@ -1107,6 +1313,7 @@
         to,
         length,
         baseId,
+        reversed: Boolean(options.reversed),
         virtual: Boolean(options.virtual),
         properties: options.properties || {}
       };
@@ -1122,6 +1329,9 @@
       const length = options.length ||
         turf.distance(start, end, { units: "meters" });
       if (length < 0.05) return null;
+      const coordinates = Array.isArray(options.coordinates) && options.coordinates.length >= 2
+        ? options.coordinates.map(coord => [Number(coord[0]), Number(coord[1])])
+        : [start, end];
 
       const baseId = targetGraph.baseEdges.length;
       targetGraph.baseEdges.push({
@@ -1129,21 +1339,24 @@
         from,
         to,
         length,
+        coordinates,
         virtual: Boolean(options.virtual),
         properties: options.properties || {}
       });
 
       if (options.forward !== false) {
-        addDirectedEdge(targetGraph, from, to, length, baseId, options);
+        addDirectedEdge(targetGraph, from, to, length, baseId, {
+          ...options,
+          reversed: false
+        });
       }
       if (options.backward !== false) {
-        addDirectedEdge(targetGraph, to, from, length, baseId, options);
+        addDirectedEdge(targetGraph, to, from, length, baseId, {
+          ...options,
+          reversed: true
+        });
       }
       return baseId;
-    }
-
-    function connectionExists(targetGraph, from, to) {
-      return targetGraph.adjacency[from].some(edge => edge.to === to);
     }
 
     function buildGraph(normalized) {
@@ -1152,16 +1365,49 @@
         ? allCoords.reduce((sum, coord) => sum + coord[1], 0) / allCoords.length
         : 52.08;
       const targetGraph = createEmptyGraph(referenceLatitude);
-      const splitSegments = splitLinesAtIntersections(normalized.lines);
+      const topologyNodes = new Map();
 
-      splitSegments.forEach(segment => {
-        const direction = walkingDirection(segment.properties);
+      const topologyNode = (sourceNodeId, coord) => {
+        if (sourceNodeId === undefined || sourceNodeId === null) {
+          throw new Error("Een edge bevat geen geldige _from_node of _to_node.");
+        }
+        if (topologyNodes.has(sourceNodeId)) {
+          const nodeId = topologyNodes.get(sourceNodeId);
+          const distance = turf.distance(targetGraph.nodes[nodeId].coord, coord, {
+            units: "meters"
+          });
+          if (distance > 0.05) {
+            throw new Error(`Node ${sourceNodeId} heeft meerdere coördinaten.`);
+          }
+          return nodeId;
+        }
+        const nodeId = targetGraph.nodes.length;
+        targetGraph.nodes.push({
+          id: nodeId,
+          sourceNodeId,
+          coord: [Number(coord[0]), Number(coord[1])]
+        });
+        targetGraph.adjacency.push([]);
+        topologyNodes.set(sourceNodeId, nodeId);
+        return nodeId;
+      };
+
+      normalized.lines.forEach(line => {
+        const properties = line.properties || {};
+        const direction = walkingDirection(properties);
         if (!direction.allowed) return;
-        const from = addGraphNode(targetGraph, segment.a);
-        const to = addGraphNode(targetGraph, segment.b);
+        const from = topologyNode(properties._from_node, line.coordinates[0]);
+        const to = topologyNode(
+          properties._to_node,
+          line.coordinates[line.coordinates.length - 1]
+        );
+        const length = turf.length(turf.lineString(line.coordinates), {
+          units: "kilometers"
+        }) * 1000;
         addGraphConnection(targetGraph, from, to, {
-          length: segment.length,
-          properties: segment.properties,
+          length,
+          coordinates: line.coordinates,
+          properties,
           virtual: false,
           forward: direction.forward,
           backward: direction.backward
@@ -1169,190 +1415,9 @@
       });
 
       console.log(
-        `Basisgraaf: ${targetGraph.nodes.length} knooppunten, ` +
-        `${targetGraph.baseEdges.length} ongerichte lijnstukken en ` +
+        `FME-topologiegraaf: ${targetGraph.nodes.length} knooppunten, ` +
+        `${targetGraph.baseEdges.length} edges en ` +
         `${targetGraph.edges.length} gerichte edges.`
-      );
-      return targetGraph;
-    }
-
-    function polygonBoundary(polygon) {
-      return turf.polygonToLine(polygon);
-    }
-
-    function pointInPolygonInclusive(coord, polygon) {
-      return turf.booleanPointInPolygon(turf.point(coord), polygon, {
-        ignoreBoundary: false
-      });
-    }
-
-    function lineStaysInsidePolygon(a, b, polygon, sampleDistance = CONFIG.polygonSampleDistance) {
-      const line = turf.lineString([a, b]);
-      const length = turf.length(line, { units: "meters" });
-      const samples = Math.max(1, Math.ceil(length / sampleDistance));
-      for (let i = 0; i <= samples; i++) {
-        const point = turf.along(line, (length * i / samples) / 1000, {
-          units: "kilometers"
-        });
-        if (!turf.booleanPointInPolygon(point, polygon, { ignoreBoundary: false })) {
-          return false;
-        }
-      }
-      return true;
-    }
-
-    function nearestBoundaryPoint(coord, polygon) {
-      const boundary = polygonBoundary(polygon);
-      const nearest = turf.nearestPointOnLine(boundary, turf.point(coord), {
-        units: "meters"
-      });
-      return nearest.geometry.coordinates;
-    }
-
-    function polygonShapeIsCompact(polygon) {
-      const bbox = turf.bbox(polygon);
-      const width = turf.distance([bbox[0], bbox[1]], [bbox[2], bbox[1]], {
-        units: "meters"
-      });
-      const height = turf.distance([bbox[0], bbox[1]], [bbox[0], bbox[3]], {
-        units: "meters"
-      });
-      const aspect = Math.max(width, height) / Math.max(1, Math.min(width, height));
-      const bboxArea = Math.max(1, width * height);
-      const fillRatio = turf.area(polygon) / bboxArea;
-      const hasHoles = polygon.geometry.coordinates.length > 1;
-      return aspect <= 3 && fillRatio >= 0.34 && !hasHoles;
-    }
-
-    function farthestCoordinatePair(coords) {
-      let best = null;
-      let bestDistance = -1;
-      for (let i = 0; i < coords.length; i++) {
-        for (let j = i + 1; j < coords.length; j++) {
-          const distance = turf.distance(coords[i], coords[j], { units: "meters" });
-          if (distance > bestDistance) {
-            bestDistance = distance;
-            best = [coords[i], coords[j]];
-          }
-        }
-      }
-      return best;
-    }
-
-    function addPolygonConnections(targetGraph, polygons) {
-      let virtualConnections = 0;
-      let processedPolygons = 0;
-
-      polygons.forEach((polygon, polygonIndex) => {
-        const originalNodeCount = targetGraph.nodes.length;
-        const accessCandidates = [];
-        const boundary = polygonBoundary(polygon);
-
-        for (let nodeId = 0; nodeId < originalNodeCount; nodeId++) {
-          const coord = targetGraph.nodes[nodeId].coord;
-          const inside = pointInPolygonInclusive(coord, polygon);
-          let distance = 0;
-          if (!inside) {
-            const nearest = turf.nearestPointOnLine(boundary, turf.point(coord), {
-              units: "meters"
-            });
-            distance = Number(nearest.properties.dist);
-          }
-          if (inside || distance <= CONFIG.polygonAccessDistance) {
-            accessCandidates.push({ nodeId, coord, inside, boundaryDistance: distance });
-          }
-        }
-
-        if (accessCandidates.length < 1) return;
-        processedPolygons++;
-
-        const portalIds = [];
-        accessCandidates.forEach(access => {
-          if (access.inside) {
-            portalIds.push(access.nodeId);
-            return;
-          }
-          const portalCoord = nearestBoundaryPoint(access.coord, polygon);
-          const portalId = addGraphNode(targetGraph, portalCoord, 0.3);
-          if (!connectionExists(targetGraph, access.nodeId, portalId)) {
-            addGraphConnection(targetGraph, access.nodeId, portalId, {
-              virtual: true,
-              properties: { polygonAccess: polygonIndex }
-            });
-            virtualConnections++;
-          }
-          portalIds.push(portalId);
-        });
-
-        const uniquePortalIds = [...new Set(portalIds)];
-        const centerCoord = turf.pointOnFeature(polygon).geometry.coordinates;
-        const internalCoords = [centerCoord];
-
-        if (!polygonShapeIsCompact(polygon) && uniquePortalIds.length >= 2) {
-          const portalCoords = uniquePortalIds.map(id => targetGraph.nodes[id].coord);
-          const pair = farthestCoordinatePair(portalCoords);
-          if (pair) {
-            const axis = turf.lineString(pair);
-            const axisLength = turf.length(axis, { units: "kilometers" });
-            [1 / 3, 2 / 3].forEach(fraction => {
-              const coord = turf.along(axis, axisLength * fraction, {
-                units: "kilometers"
-              }).geometry.coordinates;
-              if (pointInPolygonInclusive(coord, polygon)) internalCoords.push(coord);
-            });
-          }
-        }
-
-        const internalIds = [...new Set(internalCoords.map(coord =>
-          addGraphNode(targetGraph, coord, 0.3)
-        ))];
-
-        const addVisibleConnection = (from, to) => {
-          if (from === to || connectionExists(targetGraph, from, to)) return false;
-          const a = targetGraph.nodes[from].coord;
-          const b = targetGraph.nodes[to].coord;
-          if (!lineStaysInsidePolygon(a, b, polygon)) return false;
-          addGraphConnection(targetGraph, from, to, {
-            virtual: true,
-            properties: { polygon: polygonIndex }
-          });
-          virtualConnections++;
-          return true;
-        };
-
-        uniquePortalIds.forEach(portalId => {
-          internalIds.forEach(internalId => addVisibleConnection(portalId, internalId));
-        });
-
-        for (let i = 0; i < internalIds.length; i++) {
-          for (let j = i + 1; j < internalIds.length; j++) {
-            addVisibleConnection(internalIds[i], internalIds[j]);
-          }
-        }
-
-        // Directe zichtverbindingen helpen vooral bij holle of langgerekte vlakken.
-        uniquePortalIds.forEach(portalId => {
-          const nearestOthers = uniquePortalIds
-            .filter(id => id !== portalId)
-            .map(id => ({
-              id,
-              distance: turf.distance(
-                targetGraph.nodes[portalId].coord,
-                targetGraph.nodes[id].coord,
-                { units: "meters" }
-              )
-            }))
-            .sort((a, b) => a.distance - b.distance)
-            .slice(0, 8);
-          nearestOthers.forEach(item => addVisibleConnection(portalId, item.id));
-        });
-      });
-
-      computeCyclicCore(targetGraph);
-      console.log(
-        `Polygonverbindingen: ${processedPolygons} polygonen gekoppeld met ` +
-        `${virtualConnections} virtuele verbindingen. Totale graaf: ` +
-        `${targetGraph.nodes.length} knooppunten en ${targetGraph.edges.length} gerichte edges.`
       );
       return targetGraph;
     }
@@ -1399,6 +1464,162 @@
         if (!best || distance < best.distance) best = { nodeId: node.id, distance };
       });
       return best;
+    }
+
+    function resetRoutingGraph() {
+      if (!baseGraph) throw new Error("De basisgraaf is nog niet beschikbaar.");
+      graph = cloneRoutingGraph(baseGraph);
+    }
+
+    function findNearestBasePosition(coordOrLatLng) {
+      const coord = Array.isArray(coordOrLatLng)
+        ? coordOrLatLng
+        : [coordOrLatLng.lng, coordOrLatLng.lat];
+      const point = turf.point(coord);
+      let nearest = null;
+      graph.baseEdges.forEach(base => {
+        if (base.virtual || base.coordinates.length < 2) return;
+        const snapped = turf.nearestPointOnLine(
+          turf.lineString(base.coordinates),
+          point,
+          { units: "meters" }
+        );
+        const distance = Number(snapped.properties.dist);
+        if (!Number.isFinite(distance) || (nearest && distance >= nearest.distance)) return;
+        nearest = {
+          baseId: base.id,
+          coord: snapped.geometry.coordinates.map(Number),
+          distance,
+          location: Number(snapped.properties.location) || 0,
+          index: Math.max(0, Math.min(
+            base.coordinates.length - 2,
+            Number(snapped.properties.index) || 0
+          )),
+          nodeId: null
+        };
+      });
+      return nearest;
+    }
+
+    function addTemporaryNode(coord) {
+      const node = {
+        id: graph.nodes.length,
+        coord: [Number(coord[0]), Number(coord[1])],
+        virtual: true
+      };
+      graph.nodes.push(node);
+      graph.adjacency.push([]);
+      return node.id;
+    }
+
+    function pushCoordinate(target, coord) {
+      const numeric = [Number(coord[0]), Number(coord[1])];
+      const previous = target[target.length - 1];
+      if (!previous || Math.abs(previous[0] - numeric[0]) > 1e-12 ||
+          Math.abs(previous[1] - numeric[1]) > 1e-12) {
+        target.push(numeric);
+      }
+    }
+
+    function coordinatesBetweenPositions(base, fromPosition, toPosition) {
+      const coordinates = [];
+      pushCoordinate(coordinates, fromPosition.coord);
+      for (let index = fromPosition.index + 1;
+        index <= toPosition.index && index < base.coordinates.length;
+        index++) {
+        pushCoordinate(coordinates, base.coordinates[index]);
+      }
+      pushCoordinate(coordinates, toPosition.coord);
+      return coordinates;
+    }
+
+    function preparePointToPointEndpoints(startLatLng, endLatLng) {
+      const start = findNearestBasePosition(startLatLng);
+      const end = findNearestBasePosition(endLatLng);
+      if (!start || !end) return null;
+
+      const positionsByBase = new Map();
+      [{ ...start, key: "start" }, { ...end, key: "end" }].forEach(position => {
+        if (!positionsByBase.has(position.baseId)) positionsByBase.set(position.baseId, []);
+        positionsByBase.get(position.baseId).push(position);
+      });
+      const resolved = {};
+
+      positionsByBase.forEach((positions, baseId) => {
+        const base = graph.baseEdges[baseId];
+        const forwardAllowed = graph.adjacency[base.from].some(edge =>
+          !edge.disabled && edge.baseId === baseId && edge.to === base.to
+        );
+        const backwardAllowed = graph.adjacency[base.to].some(edge =>
+          !edge.disabled && edge.baseId === baseId && edge.to === base.from
+        );
+        positions.sort((a, b) => a.location - b.location);
+
+        positions.forEach((position, index) => {
+          if (position.location <= 0.2) position.nodeId = base.from;
+          else if (base.length - position.location <= 0.2) position.nodeId = base.to;
+          else if (index > 0 &&
+              Math.abs(position.location - positions[index - 1].location) <= 0.2) {
+            position.nodeId = positions[index - 1].nodeId;
+          } else {
+            position.nodeId = addTemporaryNode(position.coord);
+          }
+          resolved[position.key] = position;
+        });
+
+        const interior = positions.filter(position =>
+          position.nodeId !== base.from && position.nodeId !== base.to
+        );
+        if (!interior.length) return;
+        graph.edges.forEach(edge => {
+          if (edge.baseId === baseId) edge.disabled = true;
+        });
+
+        const boundaries = [
+          { coord: base.coordinates[0], index: -1, location: 0, nodeId: base.from },
+          ...positions.filter((position, index) =>
+            position.nodeId !== base.from &&
+            position.nodeId !== base.to &&
+            (index === 0 || position.nodeId !== positions[index - 1].nodeId)
+          ),
+          {
+            coord: base.coordinates[base.coordinates.length - 1],
+            index: base.coordinates.length - 1,
+            location: base.length,
+            nodeId: base.to
+          }
+        ];
+        for (let index = 1; index < boundaries.length; index++) {
+          const fromPosition = boundaries[index - 1];
+          const toPosition = boundaries[index];
+          if (fromPosition.nodeId === toPosition.nodeId) continue;
+          const coordinates = coordinatesBetweenPositions(base, fromPosition, toPosition);
+          const length = turf.length(turf.lineString(coordinates), { units: "kilometers" }) * 1000;
+          addGraphConnection(graph, fromPosition.nodeId, toPosition.nodeId, {
+            length,
+            coordinates,
+            properties: { ...base.properties, temporary_snap: true },
+            virtual: true,
+            forward: forwardAllowed,
+            backward: backwardAllowed
+          });
+        }
+      });
+
+      return {
+        start: {
+          nodeId: resolved.start.nodeId,
+          coord: resolved.start.coord,
+          distance: resolved.start.distance,
+          baseId: resolved.start.baseId
+        },
+        end: {
+          nodeId: resolved.end.nodeId,
+          coord: resolved.end.coord,
+          distance: resolved.end.distance,
+          baseId: resolved.end.baseId
+        }
+      };
     }
 
     function nodeDirectionCount(nodeId) {
@@ -1499,6 +1720,13 @@
       return { nodes, edges, length: result.dist[targetNodeId] };
     }
 
+    function logicalBaseId(edge) {
+      const originalId = edge && edge.properties
+        ? Number(edge.properties.edit_original_base_id)
+        : NaN;
+      return Number.isInteger(originalId) ? originalId : edge.baseId;
+    }
+
     function dijkstra(startNodeId, targetNodeId = null, options = {}) {
       const nodeCount = graph.nodes.length;
       const dist = new Float64Array(nodeCount);
@@ -1509,6 +1737,10 @@
       prevEdge.fill(-1);
       const heap = new MinHeap();
       const penalizedBaseEdges = options.penalizedBaseEdges || new Set();
+      const blockedBaseEdges = options.blockedBaseEdges || new Set();
+      const blockedLogicalBaseEdges = options.blockedLogicalBaseEdges || new Set();
+      const blockedDirectedEdges = options.blockedDirectedEdges || new Set();
+      const blockedNodes = options.blockedNodes || new Set();
       const overlapPenalty = Number(options.overlapPenalty) || 1;
       const maxDistance = Number(options.maxDistance) || Infinity;
       dist[startNodeId] = 0;
@@ -1521,7 +1753,13 @@
         if (targetNodeId !== null && current.nodeId === targetNodeId) break;
 
         for (const edge of graph.adjacency[current.nodeId]) {
-          const factor = penalizedBaseEdges.has(edge.baseId) ? overlapPenalty : 1;
+          if (edge.disabled) continue;
+          const routeBaseId = logicalBaseId(edge);
+          if (blockedBaseEdges.has(edge.baseId) ||
+              blockedLogicalBaseEdges.has(routeBaseId)) continue;
+          if (blockedDirectedEdges.has(edge.id)) continue;
+          if (blockedNodes.has(edge.to) && edge.to !== targetNodeId) continue;
+          const factor = penalizedBaseEdges.has(routeBaseId) ? overlapPenalty : 1;
           const nextDistance = current.priority + edge.length * factor;
           if (nextDistance < dist[edge.to] && nextDistance <= maxDistance) {
             dist[edge.to] = nextDistance;
@@ -1538,6 +1776,85 @@
         return { ...result, path };
       }
       return result;
+    }
+
+    function distancesToNode(targetNodeId) {
+      const incoming = graph.nodes.map(() => []);
+      graph.edges.forEach(edge => {
+        if (!edge.disabled) incoming[edge.to].push(edge);
+      });
+      const dist = new Float64Array(graph.nodes.length);
+      dist.fill(Infinity);
+      dist[targetNodeId] = 0;
+      const heap = new MinHeap();
+      heap.push({ nodeId: targetNodeId, priority: 0 });
+      while (heap.size) {
+        const current = heap.pop();
+        if (!current || current.priority !== dist[current.nodeId]) continue;
+        for (const edge of incoming[current.nodeId]) {
+          const nextDistance = current.priority + edge.length;
+          if (nextDistance < dist[edge.from]) {
+            dist[edge.from] = nextDistance;
+            heap.push({ nodeId: edge.from, priority: nextDistance });
+          }
+        }
+      }
+      return dist;
+    }
+
+    function yenKShortestPaths(startNodeId, endNodeId, maximumPaths) {
+      const first = dijkstra(startNodeId, endNodeId).path;
+      let calculations = 1;
+      if (!first) return { paths: [], calculations };
+      const accepted = [first];
+      const acceptedSignatures = new Set([
+        first.edges.map(edge => edge.id).join(",")
+      ]);
+      const candidateMap = new Map();
+
+      while (accepted.length < maximumPaths &&
+          calculations < CONFIG.maxRouteCalculations) {
+        const previous = accepted[accepted.length - 1];
+        for (let spurIndex = 0;
+          spurIndex < previous.nodes.length - 1 &&
+          calculations < CONFIG.maxRouteCalculations;
+          spurIndex++) {
+          const rootNodes = previous.nodes.slice(0, spurIndex + 1);
+          const rootEdges = previous.edges.slice(0, spurIndex);
+          const blockedDirectedEdges = new Set();
+          accepted.forEach(path => {
+            const sameRoot = rootNodes.every((nodeId, index) =>
+              path.nodes[index] === nodeId
+            );
+            if (sameRoot && path.edges[spurIndex]) {
+              blockedDirectedEdges.add(path.edges[spurIndex].id);
+            }
+          });
+          const spur = dijkstra(rootNodes[rootNodes.length - 1], endNodeId, {
+            blockedDirectedEdges,
+            blockedNodes: new Set(rootNodes.slice(0, -1))
+          }).path;
+          calculations++;
+          if (!spur) continue;
+          const nodes = [...rootNodes.slice(0, -1), ...spur.nodes];
+          if (new Set(nodes).size !== nodes.length) continue;
+          const edges = [...rootEdges, ...spur.edges];
+          const signature = edges.map(edge => edge.id).join(",");
+          if (acceptedSignatures.has(signature) || candidateMap.has(signature)) continue;
+          candidateMap.set(signature, {
+            nodes,
+            edges,
+            length: edges.reduce((sum, edge) => sum + edge.length, 0)
+          });
+        }
+        if (!candidateMap.size) break;
+        const next = [...candidateMap.entries()]
+          .sort((a, b) => a[1].length - b[1].length)[0];
+        candidateMap.delete(next[0]);
+        accepted.push(next[1]);
+        acceptedSignatures.add(next[0]);
+      }
+      return { paths: accepted, calculations };
     }
 
     function calculateOverlap(routeEdges) {
@@ -1571,6 +1888,25 @@
         distanceDeviation,
         overlapRatio,
         startDistanceRatio
+      };
+    }
+
+    function scorePointToPointRoute(route, referenceDistance, searchRadius = 250) {
+      const distanceDeviation = Math.abs(route.length - referenceDistance) /
+        Math.max(referenceDistance, 1);
+      const overlapRatio = route.overlapLength / Math.max(route.length, 1);
+      const snapDistanceRatio = (route.startDistance + route.endDistance) /
+        (2 * Math.max(searchRadius, 1));
+      return {
+        score:
+          5 * distanceDeviation +
+          4 * overlapRatio +
+          0.5 * snapDistanceRatio +
+          route.immediateTurnaroundPenalty,
+        distanceDeviation,
+        overlapRatio,
+        startDistanceRatio: route.startDistance / Math.max(searchRadius, 1),
+        endDistanceRatio: route.endDistance / Math.max(searchRadius, 1)
       };
     }
 
@@ -1608,18 +1944,527 @@
     }
 
     function routeCoordinates(startNodeId, edges) {
-      const coords = [graph.nodes[startNodeId].coord];
-      edges.forEach(edge => coords.push(graph.nodes[edge.to].coord));
+      const coords = [];
+      edges.forEach(edge => {
+        const base = graph.baseEdges[edge.baseId];
+        if (!base) return;
+        const edgeCoords = edge.reversed
+          ? [...base.coordinates].reverse()
+          : base.coordinates;
+        if (!coords.length) {
+          edgeCoords.forEach(coord => coords.push(coord));
+        } else {
+          edgeCoords.slice(1).forEach(coord => coords.push(coord));
+        }
+      });
+      if (!coords.length) coords.push(graph.nodes[startNodeId].coord);
       return coords;
+    }
+
+    function directedEdgeCoordinates(edge) {
+      const base = graph.baseEdges[edge.baseId];
+      if (!base) return [];
+      return edge.reversed
+        ? [...base.coordinates].reverse()
+        : base.coordinates;
+    }
+
+    function cloneRoute(route) {
+      return {
+        ...route,
+        edges: [...route.edges],
+        nodes: [...route.nodes],
+        coordinates: route.coordinates.map(coord => [...coord]),
+        waypoints: (route.waypoints || []).map(waypoint => ({ ...waypoint })),
+        legEndEdgeIndexes: [...(route.legEndEdgeIndexes || [])]
+      };
+    }
+
+    function routeSignature(route) {
+      return route.edges
+        .map(edge => `${logicalBaseId(edge)}:${edge.from}>${edge.to}`)
+        .join("|") + `#${(route.waypoints || []).map(waypoint =>
+          waypoint.coord.map(value => Number(value).toFixed(7)).join(",")
+        ).join("|")}`;
+    }
+
+    function findDirectedBaseEdge(baseId, from, to) {
+      return graph.adjacency[from].find(edge =>
+        !edge.disabled && edge.baseId === baseId && edge.to === to
+      ) || null;
+    }
+
+    function baseIsRoutable(baseId) {
+      return graph.edges.some(edge => !edge.disabled && edge.baseId === baseId);
+    }
+
+    function validateRouteEdgeChain(route, edges) {
+      let current = route.startNodeId;
+      for (const edge of edges) {
+        if (edge.from !== current) return false;
+        current = edge.to;
+      }
+      const expectedEnd = route.routeType === "pointToPoint"
+        ? route.endNodeId
+        : route.startNodeId;
+      return current === expectedEnd;
+    }
+
+    function clearEditLayers() {
+      if (appState.edit.graphBeforePreview) {
+        graph = appState.edit.graphBeforePreview;
+        appState.edit.graphBeforePreview = null;
+      }
+      editHitLayers.forEach(layer => map.removeLayer(layer));
+      editHitLayers = [];
+      [editSourceHighlight, editTargetHighlight, editHandleMarker].forEach(layer => {
+        if (layer) map.removeLayer(layer);
+      });
+      editSourceHighlight = null;
+      editTargetHighlight = null;
+      editHandleMarker = null;
+      editHandleOrigin = null;
+      appState.edit.sourceEdgeIndex = null;
+      if (appState.edit.previewLayer) map.removeLayer(appState.edit.previewLayer);
+      appState.edit.previewLayer = null;
+      appState.edit.previewRoute = null;
+      editActionsElement.classList.remove("previewing");
+    }
+
+    function hideUnselectedRoutesForEditing() {
+      routeLayers.forEach((routeLayer, index) => {
+        if (index === selectedRouteIndex) return;
+        if (map.hasLayer(routeLayer.halo)) map.removeLayer(routeLayer.halo);
+        if (map.hasLayer(routeLayer.line)) map.removeLayer(routeLayer.line);
+      });
+      appPanel.classList.add("editing-route");
+    }
+
+    function restoreRoutesAfterEditing() {
+      appPanel.classList.remove("editing-route");
+      const selectedLayer = routeLayers[selectedRouteIndex];
+      if (selectedLayer && map.hasLayer(selectedLayer.line)) {
+        selectedLayer.halo.bringToFront();
+        selectedLayer.line.bringToFront();
+      }
+    }
+
+    function updateEditControls() {
+      const route = currentRoutes[selectedRouteIndex];
+      editActionsElement.classList.toggle("hidden", !route);
+      if (!route) return;
+      const history = routeEditHistories[selectedRouteIndex] || [];
+      undoEditButton.disabled = history.length === 0;
+      const original = originalRoutes[selectedRouteIndex];
+      resetEditButton.disabled = !original ||
+        routeSignature(route) === routeSignature(original);
+    }
+
+    function endEditMode() {
+      clearEditLayers();
+      restoreRoutesAfterEditing();
+      setInteraction(currentRoutes.length
+        ? INTERACTION.RESULTS
+        : (activeRouteType() === "pointToPoint"
+          ? (appState.points.end ? INTERACTION.READY_AB :
+            (appState.points.start ? INTERACTION.PICK_B : INTERACTION.PICK_A))
+          : INTERACTION.PICK_LOOP_START));
+      editRouteButton.classList.remove("active");
+      editRouteButton.textContent = "Route aanpassen";
+      editHintElement.classList.add("hidden");
+      updateEditControls();
+    }
+
+    function showEditTarget(baseId) {
+      if (editTargetHighlight) map.removeLayer(editTargetHighlight);
+      const base = graph.baseEdges[baseId];
+      if (!base) return;
+      editTargetHighlight = L.polyline(
+        base.coordinates.map(coord => [coord[1], coord[0]]),
+        { color: "#00856a", weight: 7, opacity: 0.92, interactive: false }
+      ).addTo(map);
+    }
+
+    function findNearestEditableBaseEdge(latLng, maximumDistance = 60) {
+      const route = currentRoutes[selectedRouteIndex];
+      if (!route) return null;
+      const used = new Set(route.edges.map(logicalBaseId));
+      const point = turf.point([latLng.lng, latLng.lat]);
+      let nearest = null;
+      graph.baseEdges.forEach(base => {
+        if (base.virtual) return;
+        if (used.has(base.id) || !baseIsRoutable(base.id)) return;
+        const snapped = turf.nearestPointOnLine(
+          turf.lineString(base.coordinates),
+          point,
+          { units: "meters" }
+        );
+        const distance = Number(snapped.properties.dist);
+        if (Number.isFinite(distance) && distance <= maximumDistance &&
+            (!nearest || distance < nearest.distance)) {
+          nearest = {
+            baseId: base.id,
+            distance,
+            latLng: L.latLng(snapped.geometry.coordinates[1], snapped.geometry.coordinates[0])
+          };
+        }
+      });
+      return nearest;
+    }
+
+    function addWaypointAtNetworkPosition(target) {
+      const base = graph.baseEdges[target.baseId];
+      if (!base || !baseIsRoutable(base.id)) return null;
+      const point = turf.point([target.latLng.lng, target.latLng.lat]);
+      const snapped = turf.nearestPointOnLine(
+        turf.lineString(base.coordinates),
+        point,
+        { units: "meters" }
+      );
+      const coord = snapped.geometry.coordinates.map(Number);
+      const location = Number(snapped.properties.location) || 0;
+      const segmentIndex = Math.max(0, Math.min(
+        base.coordinates.length - 2,
+        Number(snapped.properties.index) || 0
+      ));
+      if (location <= 0.2) {
+        return { nodeId: base.from, coord, originalBaseId: base.id, kind: "user" };
+      }
+      if (base.length - location <= 0.2) {
+        return { nodeId: base.to, coord, originalBaseId: base.id, kind: "user" };
+      }
+
+      const forwardAllowed = Boolean(findDirectedBaseEdge(base.id, base.from, base.to));
+      const backwardAllowed = Boolean(findDirectedBaseEdge(base.id, base.to, base.from));
+      const nodeId = addTemporaryNode(coord);
+      const snapPosition = { coord, index: segmentIndex, location, nodeId };
+      const fromPosition = {
+        coord: base.coordinates[0], index: -1, location: 0, nodeId: base.from
+      };
+      const toPosition = {
+        coord: base.coordinates[base.coordinates.length - 1],
+        index: base.coordinates.length - 1,
+        location: base.length,
+        nodeId: base.to
+      };
+      [
+        [fromPosition, snapPosition],
+        [snapPosition, toPosition]
+      ].forEach(([from, to]) => {
+        const coordinates = coordinatesBetweenPositions(base, from, to);
+        const length = turf.length(turf.lineString(coordinates), {
+          units: "kilometers"
+        }) * 1000;
+        addGraphConnection(graph, from.nodeId, to.nodeId, {
+          length,
+          coordinates,
+          properties: {
+            ...base.properties,
+            edit_waypoint: true,
+            edit_original_base_id: base.id
+          },
+          virtual: true,
+          forward: forwardAllowed,
+          backward: backwardAllowed
+        });
+      });
+      return { nodeId, coord, originalBaseId: base.id, kind: "user" };
+    }
+
+    function buildRouteThroughWaypoints(route, sourceEdgeIndex, newWaypoint) {
+      const sourceEdge = route.edges[sourceEdgeIndex];
+      if (!sourceEdge || !newWaypoint) return null;
+      const allowOverlap = document.getElementById("allowOverlapInput").checked;
+      const targetDistance = Number(document.getElementById("distanceInput").value) || route.length;
+      const searchRadius = Number(document.getElementById("radiusInput").value) ||
+        CONFIG.defaultSearchRadius;
+      const endNodeId = route.routeType === "pointToPoint"
+        ? route.endNodeId
+        : route.startNodeId;
+      const existingWaypoints = [...(route.waypoints || [])];
+      const legEnds = route.legEndEdgeIndexes || [];
+      let insertIndex = existingWaypoints.length;
+      if (legEnds.length) {
+        const legIndex = legEnds.findIndex(edgeEnd => sourceEdgeIndex < edgeEnd);
+        if (legIndex >= 0) insertIndex = legIndex;
+      }
+      const waypoints = [...existingWaypoints];
+      waypoints.splice(insertIndex, 0, newWaypoint);
+      const candidates = [];
+
+      CONFIG.overlapPenalties.forEach(overlapPenalty => {
+        const usedBaseIds = new Set();
+        const blockedWaypointBases = new Set(
+          waypoints.map(waypoint => waypoint.originalBaseId)
+        );
+        blockedWaypointBases.add(logicalBaseId(sourceEdge));
+        const sequence = [
+          route.startNodeId,
+          ...waypoints.map(waypoint => waypoint.nodeId),
+          endNodeId
+        ];
+        const edges = [];
+        const nodes = [route.startNodeId];
+        const candidateLegEnds = [];
+
+        for (let index = 1; index < sequence.length; index++) {
+          const from = sequence[index - 1];
+          const to = sequence[index];
+          if (from === to) {
+            candidateLegEnds.push(edges.length);
+            continue;
+          }
+          const blockedBaseEdges = new Set(blockedWaypointBases);
+          const blockedLogicalBaseEdges = new Set([logicalBaseId(sourceEdge)]);
+          if (!allowOverlap) {
+            usedBaseIds.forEach(baseId => blockedLogicalBaseEdges.add(baseId));
+          }
+          const result = dijkstra(from, to, {
+            blockedBaseEdges,
+            blockedLogicalBaseEdges,
+            penalizedBaseEdges: usedBaseIds,
+            overlapPenalty
+          });
+          if (!result.path) return;
+          result.path.edges.forEach(edge => usedBaseIds.add(logicalBaseId(edge)));
+          edges.push(...result.path.edges);
+          nodes.push(...result.path.nodes.slice(1));
+          candidateLegEnds.push(edges.length);
+        }
+        if (!validateRouteEdgeChain(route, edges)) return;
+        const length = edges.reduce((sum, edge) => sum + edge.length, 0);
+        const overlapLength = calculateOverlap(edges);
+        const overlapRatio = overlapLength / Math.max(length, 1);
+        if ((!allowOverlap && overlapRatio > 1e-9) ||
+            (allowOverlap && overlapRatio > CONFIG.maxOverlap + 1e-9)) return;
+        const checkedNodes = route.routeType === "pointToPoint" ? nodes : nodes.slice(0, -1);
+        const repeatedNodes = checkedNodes.length - new Set(checkedNodes).size;
+        if (!allowOverlap && repeatedNodes > 0) return;
+        const immediateTurnaround = edges.some((edge, index) =>
+          index > 0 && logicalBaseId(edge) === logicalBaseId(edges[index - 1])
+        );
+        const candidate = {
+          ...route,
+          waypoints,
+          legEndEdgeIndexes: candidateLegEnds,
+          edges,
+          nodes,
+          length,
+          overlapLength,
+          immediateTurnaroundPenalty: immediateTurnaround ? 0.75 : 0,
+          edited: true
+        };
+        if (route.routeType === "pointToPoint") {
+          const referenceDistance = route.routePreference === "shortest"
+            ? route.shortestLength
+            : targetDistance;
+          Object.assign(candidate, scorePointToPointRoute(
+            candidate,
+            referenceDistance,
+            route.snapSearchRadius || searchRadius
+          ));
+        } else {
+          Object.assign(candidate, scoreRoute(candidate, targetDistance, searchRadius));
+        }
+        candidate.score += repeatedNodes * 0.4;
+        candidate.coordinates = routeCoordinates(candidate.startNodeId, edges);
+        candidates.push(candidate);
+      });
+
+      return removeDuplicateRoutes(candidates)
+        .sort((a, b) => a.score - b.score)[0] || null;
+    }
+
+    function findNearestRouteEdgeIndex(route, latLng, maximumDistance = 30) {
+      const point = turf.point([latLng.lng, latLng.lat]);
+      let nearestIndex = null;
+      let nearestDistance = Infinity;
+      route.edges.forEach((edge, edgeIndex) => {
+        const coordinates = directedEdgeCoordinates(edge);
+        if (coordinates.length < 2) return;
+        const snapped = turf.nearestPointOnLine(
+          turf.lineString(coordinates),
+          point,
+          { units: "meters" }
+        );
+        const distance = Number(snapped.properties.dist);
+        if (Number.isFinite(distance) && distance < nearestDistance) {
+          nearestDistance = distance;
+          nearestIndex = edgeIndex;
+        }
+      });
+      return nearestDistance <= maximumDistance ? nearestIndex : null;
+    }
+
+    function stopLeafletClick(event) {
+      if (event && event.originalEvent) {
+        L.DomEvent.stopPropagation(event.originalEvent);
+      }
+    }
+
+    function selectEditSource(edgeIndex, latLng) {
+      const route = currentRoutes[selectedRouteIndex];
+      const edge = route && route.edges[edgeIndex];
+      if (!edge) return;
+      appState.edit.sourceEdgeIndex = edgeIndex;
+      setInteraction(INTERACTION.EDIT_TARGET);
+      if (editSourceHighlight) map.removeLayer(editSourceHighlight);
+      if (editHandleMarker) map.removeLayer(editHandleMarker);
+      if (editTargetHighlight) map.removeLayer(editTargetHighlight);
+      editTargetHighlight = null;
+
+      const coordinates = directedEdgeCoordinates(edge);
+      editSourceHighlight = L.polyline(
+        coordinates.map(coord => [coord[1], coord[0]]),
+        { color: "#e56a00", weight: 8, opacity: 1, interactive: false }
+      ).addTo(map);
+      const snapped = turf.nearestPointOnLine(
+        turf.lineString(coordinates),
+        turf.point([latLng.lng, latLng.lat]),
+        { units: "meters" }
+      );
+      const handleLatLng = L.latLng(
+        snapped.geometry.coordinates[1],
+        snapped.geometry.coordinates[0]
+      );
+      editHandleOrigin = handleLatLng;
+      editHandleMarker = L.marker(handleLatLng, {
+        draggable: true,
+        zIndexOffset: 1400,
+        icon: L.divIcon({ className: "edit-handle", html: "", iconSize: [22, 22] })
+      }).addTo(map);
+      editHandleMarker.on("drag", event => {
+        const nearest = findNearestEditableBaseEdge(event.target.getLatLng());
+        if (nearest) showEditTarget(nearest.baseId);
+        else if (editTargetHighlight) {
+          map.removeLayer(editTargetHighlight);
+          editTargetHighlight = null;
+        }
+      });
+      editHandleMarker.on("dragend", event => {
+        const nearest = findNearestEditableBaseEdge(event.target.getLatLng());
+        if (nearest) {
+          event.target.setLatLng(nearest.latLng);
+          previewRouteDetour(nearest);
+        } else {
+          event.target.setLatLng(editHandleOrigin);
+          editHintElement.textContent = "Geen ander pad binnen 60 meter gevonden.";
+        }
+      });
+      editHintElement.textContent =
+        "Sleep het oranje punt naar een ander pad, of tik dat pad op de kaart.";
+    }
+
+    function beginEditMode() {
+      const route = currentRoutes[selectedRouteIndex];
+      if (!route) return;
+      clearEditLayers();
+      setInteraction(INTERACTION.EDIT_SOURCE);
+      hideUnselectedRoutesForEditing();
+      editRouteButton.classList.add("active");
+      editRouteButton.textContent = "Stop aanpassen";
+      editHintElement.textContent = "Tik eerst op het routeonderdeel dat je wilt vervangen.";
+      editHintElement.classList.remove("hidden");
+
+      route.edges.forEach((edge, edgeIndex) => {
+        const sourceLayer = L.polyline(
+          directedEdgeCoordinates(edge).map(coord => [coord[1], coord[0]]),
+          { color: "#dd001c", weight: 18, opacity: 0.01, bubblingMouseEvents: false }
+        ).addTo(map);
+        sourceLayer.on("click", event => {
+          stopLeafletClick(event);
+          selectEditSource(edgeIndex, event.latlng);
+        });
+        editHitLayers.push(sourceLayer);
+      });
+    }
+
+    function previewRouteDetour(target) {
+      const route = currentRoutes[selectedRouteIndex];
+      if (!route || appState.edit.sourceEdgeIndex === null) return;
+      editHintElement.textContent = "Voorbeeld wordt berekend…";
+      const graphSnapshot = cloneRoutingGraph(graph);
+      const waypoint = addWaypointAtNetworkPosition(target);
+      const editedRoute = buildRouteThroughWaypoints(
+        route,
+        appState.edit.sourceEdgeIndex,
+        waypoint
+      );
+      if (!editedRoute) {
+        graph = graphSnapshot;
+        const openRoute = route.routeType === "pointToPoint";
+        editHintElement.textContent = document.getElementById("allowOverlapInput").checked
+          ? `Langs dit pad is geen geldige ${openRoute ? "A→B-" : "gesloten "}omleiding met maximaal 35% overlap gevonden.`
+          : `Langs dit pad is geen ${openRoute ? "A→B-" : "gesloten "}omleiding zonder overlap gevonden.`;
+        return;
+      }
+      editHitLayers.forEach(layer => map.removeLayer(layer));
+      editHitLayers = [];
+      appState.edit.graphBeforePreview = graphSnapshot;
+      appState.edit.previewRoute = editedRoute;
+      appState.edit.previewLayer = L.polyline(
+        editedRoute.coordinates.map(coord => [coord[1], coord[0]]),
+        {
+          color: "#00856a",
+          weight: 7,
+          opacity: 0.95,
+          dashArray: "8 6",
+          lineCap: "round",
+          lineJoin: "round",
+          interactive: false
+        }
+      ).addTo(map);
+      editActionsElement.classList.add("previewing");
+      setInteraction(INTERACTION.EDIT_PREVIEW);
+      const tolerance = Number(document.getElementById("toleranceInput").value) / 100;
+      const usesTolerance = route.routeType !== "pointToPoint" ||
+        route.routePreference === "distance";
+      const toleranceWarning = usesTolerance &&
+        Number.isFinite(tolerance) &&
+        editedRoute.distanceDeviation > tolerance
+        ? " Buiten de ingestelde tolerantie."
+        : "";
+      editHintElement.textContent =
+        `Voorbeeld: ${numberNL.format(editedRoute.length)} meter · ` +
+        `afwijking ${decimalNL.format(editedRoute.distanceDeviation * 100)}% · ` +
+        `overlap ${decimalNL.format(editedRoute.overlapRatio * 100)}%.` +
+        toleranceWarning;
+      map.fitBounds(appState.edit.previewLayer.getBounds(), {
+        padding: [42, 42],
+        maxZoom: 17
+      });
+    }
+
+    function confirmEditPreview() {
+      const route = currentRoutes[selectedRouteIndex];
+      const preview = appState.edit.previewRoute;
+      if (!route || !preview) return;
+      routeEditHistories[selectedRouteIndex].push(cloneRoute(route));
+      const routeIndex = selectedRouteIndex;
+      appState.edit.graphBeforePreview = null;
+      endEditMode();
+      replaceDisplayedRoute(routeIndex, preview, true);
+      setStatus(
+        "Route via het waypoint herberekend. Afstand en overlap zijn bijgewerkt.",
+        "ready"
+      );
+    }
+
+    function cancelEditPreview() {
+      endEditMode();
+      setStatus("De routewijziging is geannuleerd.", "ready");
     }
 
     function removeDuplicateRoutes(routes) {
       const unique = [];
+      const exactSignatures = new Set();
       const sorted = [...routes].sort((a, b) => a.score - b.score);
       for (const route of sorted) {
-        const routeSet = new Set(route.edges.map(edge => edge.baseId));
+        const exactSignature = routeSignature(route);
+        if (exactSignatures.has(exactSignature)) continue;
+        const routeSet = new Set(route.edges.map(logicalBaseId));
         const duplicate = unique.some(existing => {
-          const existingSet = new Set(existing.edges.map(edge => edge.baseId));
+          const existingSet = new Set(existing.edges.map(logicalBaseId));
           let intersection = 0;
           routeSet.forEach(id => {
             if (existingSet.has(id)) intersection++;
@@ -1630,12 +2475,22 @@
             Math.max(route.length, existing.length);
           return similarity >= 0.78 && lengthDifference <= 0.12;
         });
-        if (!duplicate) unique.push(route);
+        if (!duplicate) {
+          unique.push(route);
+          exactSignatures.add(exactSignature);
+        }
       }
       return unique;
     }
 
-    function generateLoops(startCandidates, targetDistance, tolerance, searchRadius) {
+    function generateLoops(
+      startCandidates,
+      targetDistance,
+      tolerance,
+      searchRadius,
+      maxResults = CONFIG.maxResults,
+      maxOverlap = CONFIG.maxOverlap
+    ) {
       const routes = [];
       let calculations = 0;
 
@@ -1649,13 +2504,13 @@
           start.nodeId,
           outboundTree,
           targetDistance,
-          6
+          Math.min(14, Math.max(6, maxResults + 3))
         );
 
         for (const waypoint of waypoints) {
           const outbound = reconstructPath(outboundTree, start.nodeId, waypoint.nodeId);
           if (!outbound) continue;
-          const outboundBaseIds = new Set(outbound.edges.map(edge => edge.baseId));
+          const outboundBaseIds = new Set(outbound.edges.map(logicalBaseId));
 
           for (const overlapPenalty of CONFIG.overlapPenalties) {
             if (calculations >= CONFIG.maxRouteCalculations) break;
@@ -1676,12 +2531,13 @@
             if (distanceDeviation > tolerance) continue;
             const overlapLength = calculateOverlap(edges);
             const overlapRatio = overlapLength / Math.max(length, 1);
-            if (overlapRatio > CONFIG.maxOverlap) continue;
+            if (overlapRatio > maxOverlap + 1e-9) continue;
 
             const immediateTurnaround =
               outbound.edges.length > 0 &&
               inbound.edges.length > 0 &&
-              outbound.edges[outbound.edges.length - 1].baseId === inbound.edges[0].baseId;
+              logicalBaseId(outbound.edges[outbound.edges.length - 1]) ===
+                logicalBaseId(inbound.edges[0]);
             const route = {
               startNodeId: start.nodeId,
               startDistance: start.distance,
@@ -1702,9 +2558,172 @@
 
       const result = removeDuplicateRoutes(routes)
         .sort((a, b) => a.score - b.score)
-        .slice(0, CONFIG.maxResults);
+        .slice(0, maxResults);
       console.log(
         `Routezoekactie: ${calculations} berekeningen, ${routes.length} geldige ` +
+        `kandidaten en ${result.length} unieke resultaten.`
+      );
+      return result;
+    }
+
+    function generatePointToPointRoutes(
+      endpoints,
+      preference,
+      targetDistance,
+      tolerance,
+      maxResults = CONFIG.maxResults,
+      maxOverlap = CONFIG.maxOverlap
+    ) {
+      const startNodeId = endpoints.start.nodeId;
+      const endNodeId = endpoints.end.nodeId;
+      const directResult = dijkstra(startNodeId, endNodeId);
+      let calculations = 1;
+      if (!directResult.path) return [];
+      const shortestLength = directResult.path.length;
+      const referenceDistance = preference === "shortest"
+        ? shortestLength
+        : targetDistance;
+      const routes = [];
+
+      function addCandidate(edges, nodes, source) {
+        if (!edges.length || nodes[0] !== startNodeId ||
+            nodes[nodes.length - 1] !== endNodeId) return;
+        const length = edges.reduce((sum, edge) => sum + edge.length, 0);
+        const distanceDeviation = Math.abs(length - referenceDistance) /
+          Math.max(referenceDistance, 1);
+        if (preference === "distance" && distanceDeviation > tolerance) return;
+        if (preference === "shortest" && length > shortestLength * 1.75) return;
+        const overlapLength = calculateOverlap(edges);
+        const overlapRatio = overlapLength / Math.max(length, 1);
+        if (overlapRatio > maxOverlap + 1e-9) return;
+        const immediateTurnaround = edges.some((edge, index) =>
+          index > 0 && logicalBaseId(edge) === logicalBaseId(edges[index - 1])
+        );
+        const route = {
+          routeType: "pointToPoint",
+          routePreference: preference,
+          startNodeId,
+          endNodeId,
+          startCoord: endpoints.start.coord,
+          endCoord: endpoints.end.coord,
+          startDistance: endpoints.start.distance,
+          endDistance: endpoints.end.distance,
+          snapSearchRadius: 250,
+          shortestLength,
+          edges,
+          nodes,
+          length,
+          overlapLength,
+          immediateTurnaroundPenalty: immediateTurnaround ? 0.75 : 0,
+          source
+        };
+        Object.assign(route, scorePointToPointRoute(route, referenceDistance));
+        route.coordinates = routeCoordinates(startNodeId, edges);
+        routes.push(route);
+      }
+
+      if (preference === "shortest") {
+        const yenResult = yenKShortestPaths(
+          startNodeId,
+          endNodeId,
+          Math.min(CONFIG.maxResults * 3, Math.max(maxResults * 2, maxResults))
+        );
+        calculations = yenResult.calculations;
+        yenResult.paths.forEach(path =>
+          addCandidate(path.edges, path.nodes, "k-shortest")
+        );
+        const result = removeDuplicateRoutes(routes)
+          .sort((a, b) => a.length - b.length || a.score - b.score)
+          .slice(0, maxResults);
+        console.log(
+          `A→B k-kortste: ${calculations} berekeningen en ${result.length} unieke resultaten.`
+        );
+        return result;
+      }
+
+      addCandidate(directResult.path.edges, directResult.path.nodes, "shortest");
+      const shortestBaseIds = new Set(
+        directResult.path.edges.map(logicalBaseId)
+      );
+
+      for (const overlapPenalty of CONFIG.overlapPenalties) {
+        if (calculations >= CONFIG.maxRouteCalculations) break;
+        const alternative = dijkstra(startNodeId, endNodeId, {
+          penalizedBaseEdges: shortestBaseIds,
+          overlapPenalty
+        });
+        calculations++;
+        if (alternative.path) {
+          addCandidate(alternative.path.edges, alternative.path.nodes, "penalty");
+        }
+      }
+
+      const blockableEdges = [...shortestBaseIds].slice(0, 28);
+      for (const baseId of blockableEdges) {
+        if (calculations >= CONFIG.maxRouteCalculations) break;
+        const alternative = dijkstra(startNodeId, endNodeId, {
+          blockedBaseEdges: new Set([baseId])
+        });
+        calculations++;
+        if (alternative.path) {
+          addCandidate(alternative.path.edges, alternative.path.nodes, "detour");
+        }
+      }
+
+      const startTree = dijkstra(startNodeId);
+      const endDistances = distancesToNode(endNodeId);
+      calculations += 2;
+      const waypointTarget = preference === "distance"
+        ? targetDistance
+        : shortestLength * 1.25;
+      const waypoints = graph.nodes
+        .filter(node =>
+          node.id !== startNodeId &&
+          node.id !== endNodeId &&
+          Number.isFinite(startTree.dist[node.id]) &&
+          Number.isFinite(endDistances[node.id])
+        )
+        .map(node => ({
+          nodeId: node.id,
+          estimatedLength: startTree.dist[node.id] + endDistances[node.id]
+        }))
+        .filter(item => preference === "distance"
+          ? item.estimatedLength >= shortestLength * 0.95 &&
+            item.estimatedLength <= targetDistance * (1 + Math.max(tolerance, 0.2))
+          : item.estimatedLength <= shortestLength * 1.7
+        )
+        .sort((a, b) =>
+          Math.abs(a.estimatedLength - waypointTarget) -
+          Math.abs(b.estimatedLength - waypointTarget)
+        )
+        .slice(0, 24);
+
+      for (const waypoint of waypoints) {
+        if (calculations >= CONFIG.maxRouteCalculations) break;
+        const outbound = reconstructPath(startTree, startNodeId, waypoint.nodeId);
+        if (!outbound) continue;
+        const outboundBaseIds = new Set(outbound.edges.map(logicalBaseId));
+        for (const overlapPenalty of [3, 6, 12]) {
+          if (calculations >= CONFIG.maxRouteCalculations) break;
+          const inboundResult = dijkstra(waypoint.nodeId, endNodeId, {
+            penalizedBaseEdges: outboundBaseIds,
+            overlapPenalty
+          });
+          calculations++;
+          if (!inboundResult.path) continue;
+          addCandidate(
+            [...outbound.edges, ...inboundResult.path.edges],
+            [...outbound.nodes, ...inboundResult.path.nodes.slice(1)],
+            "waypoint"
+          );
+        }
+      }
+
+      const result = removeDuplicateRoutes(routes)
+        .sort((a, b) => a.score - b.score)
+        .slice(0, maxResults);
+      console.log(
+        `A→B-zoekactie: ${calculations} berekeningen, ${routes.length} geldige ` +
         `kandidaten en ${result.length} unieke resultaten.`
       );
       return result;
@@ -1716,17 +2735,109 @@
         map.removeLayer(routeLayer.line);
       });
       routeLayers = [];
+      waypointMarkers.forEach(marker => map.removeLayer(marker));
+      waypointMarkers = [];
       if (actualStartMarker) map.removeLayer(actualStartMarker);
+      if (actualEndMarker) map.removeLayer(actualEndMarker);
       if (startConnector) map.removeLayer(startConnector);
+      if (endConnector) map.removeLayer(endConnector);
       actualStartMarker = null;
+      actualEndMarker = null;
       startConnector = null;
+      endConnector = null;
+    }
+
+    function routeCardMarkup(route, index) {
+      if (route.routeType === "pointToPoint") {
+        const deviationLabel = route.routePreference === "shortest"
+          ? "Langer dan kortste"
+          : "Afwijking";
+        return `
+          <span class="route-title">
+            <span>Route ${index + 1}${route.edited ? " · aangepast" : ""}</span>
+            <span class="route-distance">${numberNL.format(route.length)} meter</span>
+          </span>
+          <span class="route-meta">
+            <span>${deviationLabel}: ${decimalNL.format(route.distanceDeviation * 100)}%</span>
+            <span>Overlap: ${decimalNL.format(route.overlapRatio * 100)}%</span>
+            <span class="wide">A: ${numberNL.format(route.startDistance)} m · B: ${numberNL.format(route.endDistance)} m van de kaartklik</span>
+          </span>
+        `;
+      }
+      return `
+        <span class="route-title">
+          <span>Ronde ${index + 1}${route.edited ? " · aangepast" : ""}</span>
+          <span class="route-distance">${numberNL.format(route.length)} meter</span>
+        </span>
+        <span class="route-meta">
+          <span>Afwijking: ${decimalNL.format(route.distanceDeviation * 100)}%</span>
+          <span>Overlap: ${decimalNL.format(route.overlapRatio * 100)}%</span>
+          <span class="wide">Startpunt: ${numberNL.format(route.startDistance)} meter van de kaartklik</span>
+        </span>
+      `;
+    }
+
+    function createRouteMapLayer(route, index) {
+      const color = ROUTE_COLORS[index % ROUTE_COLORS.length];
+      const latLngs = route.coordinates.map(coord => [coord[1], coord[0]]);
+      const halo = L.polyline(latLngs, {
+        color: "#ffffff",
+        weight: 8,
+        opacity: 0.5,
+        lineCap: "round",
+        lineJoin: "round",
+        interactive: false
+      }).addTo(map);
+      const line = L.polyline(latLngs, {
+        color,
+        weight: 4.5,
+        opacity: 0.58,
+        lineCap: "round",
+        lineJoin: "round",
+        bubblingMouseEvents: false
+      }).addTo(map);
+      line.on("click", event => {
+        stopLeafletClick(event);
+        if (isEditingRoute() && index === selectedRouteIndex) {
+          if (appState.interaction === INTERACTION.EDIT_PREVIEW) return;
+          const edgeIndex = findNearestRouteEdgeIndex(route, event.latlng);
+          if (edgeIndex !== null) selectEditSource(edgeIndex, event.latlng);
+          return;
+        }
+        showResultsView(currentRoutes.length);
+        selectRoute(index);
+      });
+      return { halo, line };
+    }
+
+    function replaceDisplayedRoute(index, route, zoom = false) {
+      const oldLayer = routeLayers[index];
+      if (oldLayer) {
+        map.removeLayer(oldLayer.halo);
+        map.removeLayer(oldLayer.line);
+      }
+      currentRoutes[index] = route;
+      routeLayers[index] = createRouteMapLayer(route, index);
+      const card = resultsElement.querySelector(`[data-route-index="${index}"]`);
+      if (card) card.innerHTML = routeCardMarkup(route, index);
+      selectRoute(index, zoom);
+      updateEditControls();
     }
 
     function selectRoute(index, zoom = true) {
       const route = currentRoutes[index];
       if (!route) return;
+      if (isEditingRoute()) endEditMode();
+      selectedRouteIndex = index;
       routeLayers.forEach((routeLayer, layerIndex) => {
         const selected = layerIndex === index;
+        if (selected) {
+          if (!map.hasLayer(routeLayer.halo)) routeLayer.halo.addTo(map);
+          if (!map.hasLayer(routeLayer.line)) routeLayer.line.addTo(map);
+        } else {
+          if (map.hasLayer(routeLayer.halo)) map.removeLayer(routeLayer.halo);
+          if (map.hasLayer(routeLayer.line)) map.removeLayer(routeLayer.line);
+        }
         routeLayer.halo.setStyle({
           weight: selected ? 12 : 8,
           opacity: selected ? 0.94 : 0.5
@@ -1744,19 +2855,46 @@
         card.classList.toggle("selected", cardIndex === index);
       });
 
+      waypointMarkers.forEach(marker => map.removeLayer(marker));
+      waypointMarkers = (route.waypoints || []).map((waypoint, waypointIndex) =>
+        L.marker([waypoint.coord[1], waypoint.coord[0]], {
+          icon: L.divIcon({ className: "waypoint-pin", html: "", iconSize: [14, 14] }),
+          zIndexOffset: 1200,
+          interactive: false
+        }).addTo(map).bindTooltip(`Waypoint ${waypointIndex + 1}`)
+      );
+
       if (actualStartMarker) map.removeLayer(actualStartMarker);
+      if (actualEndMarker) map.removeLayer(actualEndMarker);
       if (startConnector) map.removeLayer(startConnector);
-      const startCoord = graph.nodes[route.startNodeId].coord;
+      if (endConnector) map.removeLayer(endConnector);
+      const startCoord = route.startCoord || graph.nodes[route.startNodeId].coord;
       actualStartMarker = L.marker([startCoord[1], startCoord[0]], {
         icon: L.divIcon({ className: "start-pin", html: "", iconSize: [24, 24] }),
         zIndexOffset: 1000
-      }).addTo(map).bindTooltip("Werkelijk startpunt");
+      }).addTo(map).bindTooltip(
+        route.routeType === "pointToPoint" ? "Werkelijk punt A" : "Werkelijk startpunt"
+      );
 
-      if (clickedPoint) {
+      if (appState.points.start) {
         startConnector = L.polyline(
-          [[clickedPoint.lat, clickedPoint.lng], [startCoord[1], startCoord[0]]],
+          [[appState.points.start.lat, appState.points.start.lng], [startCoord[1], startCoord[0]]],
           { color: "#005db9", weight: 2.5, dashArray: "5 6", opacity: 0.9 }
         ).addTo(map);
+      }
+
+      if (route.routeType === "pointToPoint") {
+        const endCoord = route.endCoord || graph.nodes[route.endNodeId].coord;
+        actualEndMarker = L.marker([endCoord[1], endCoord[0]], {
+          icon: L.divIcon({ className: "end-pin", html: "", iconSize: [24, 24] }),
+          zIndexOffset: 1000
+        }).addTo(map).bindTooltip("Werkelijk punt B");
+        if (appState.points.end) {
+          endConnector = L.polyline(
+            [[appState.points.end.lat, appState.points.end.lng], [endCoord[1], endCoord[0]]],
+            { color: "#243f59", weight: 2.5, dashArray: "5 6", opacity: 0.9 }
+          ).addTo(map);
+        }
       }
 
       if (zoom) {
@@ -1765,102 +2903,101 @@
           maxZoom: 17
         });
       }
+      updateEditControls();
     }
 
-    function displayRoutes(routes) {
+    function displayRoutes(routes, maxOverlap = CONFIG.maxOverlap) {
+      endEditMode();
       clearRouteLayers();
       resultsElement.innerHTML = "";
       currentRoutes = routes;
+      originalRoutes = routes.map(cloneRoute);
+      routeEditHistories = routes.map(() => []);
 
       if (!routes.length) {
+        editActionsElement.classList.add("hidden");
         showSearchView();
-        setStatus(
-          "Geen rondje binnen de tolerantie en maximaal 35% overlap gevonden. " +
-          "Probeer een grotere tolerantie, zoekstraal of afstand.",
-          "error"
-        );
+        setInteraction(activeRouteType() === "pointToPoint"
+          ? (appState.points.end ? INTERACTION.READY_AB :
+            (appState.points.start ? INTERACTION.PICK_B : INTERACTION.PICK_A))
+          : INTERACTION.PICK_LOOP_START);
+        const pointToPoint = activeRouteType() === "pointToPoint";
+        const shortest = pointToPoint && activeAbPreference() === "shortest";
+        setStatus(pointToPoint
+          ? (shortest
+            ? "Geen geschikte A→B-route gevonden. Kies andere punten A en B."
+            : "Geen geschikte A→B-route gevonden. Kies andere punten of verruim afstand en tolerantie.")
+          : (maxOverlap === 0
+            ? "Geen rondje zonder overlap binnen de tolerantie gevonden. "
+            : "Geen rondje binnen de tolerantie en maximaal 35% overlap gevonden. ") +
+            "Probeer een grotere tolerantie, zoekstraal of afstand.", "error");
         return;
       }
 
       routes.forEach((route, index) => {
-        const color = ROUTE_COLORS[index];
-        const latLngs = route.coordinates.map(coord => [coord[1], coord[0]]);
-        const halo = L.polyline(latLngs, {
-          color: "#ffffff",
-          weight: 8,
-          opacity: 0.5,
-          lineCap: "round",
-          lineJoin: "round",
-          interactive: false
-        }).addTo(map);
-        const line = L.polyline(latLngs, {
-          color,
-          weight: 4.5,
-          opacity: 0.58,
-          lineCap: "round",
-          lineJoin: "round"
-        }).addTo(map);
-        line.on("click", () => {
-          showResultsView(routes.length);
-          selectRoute(index);
-        });
-        routeLayers.push({ halo, line });
+        const color = ROUTE_COLORS[index % ROUTE_COLORS.length];
+        routeLayers.push(createRouteMapLayer(route, index));
 
         const card = document.createElement("button");
         card.type = "button";
         card.className = "route-card";
+        card.dataset.routeIndex = String(index);
         card.style.setProperty("--route-color", color);
-        card.innerHTML = `
-          <span class="route-title">
-            <span>Ronde ${index + 1}</span>
-            <span class="route-distance">${numberNL.format(route.length)} meter</span>
-          </span>
-          <span class="route-meta">
-            <span>Afwijking: ${decimalNL.format(route.distanceDeviation * 100)}%</span>
-            <span>Overlap: ${decimalNL.format(route.overlapRatio * 100)}%</span>
-            <span class="wide">Startpunt: ${numberNL.format(route.startDistance)} meter van de kaartklik</span>
-          </span>
-        `;
+        card.innerHTML = routeCardMarkup(route, index);
         card.addEventListener("click", () => selectRoute(index));
         resultsElement.appendChild(card);
       });
 
+      const pointToPoint = routes[0].routeType === "pointToPoint";
+      const noun = pointToPoint
+        ? (routes.length === 1 ? "route" : "routes")
+        : (routes.length === 1 ? "rondje" : "rondjes");
       setStatus(
-        `${routes.length} ${routes.length === 1 ? "rondje" : "rondjes"} gevonden. ` +
-        "Klik op een resultaat om het te bekijken.",
+        `${routes.length} ${noun} gevonden. Klik op een resultaat om het te bekijken.`,
         "ready"
       );
       showResultsView(routes.length);
       selectRoute(0);
+      setInteraction(INTERACTION.RESULTS);
     }
 
     function clearSelection(clearClick = true) {
+      endEditMode();
       showSearchView();
       clearRouteLayers();
       resultsElement.innerHTML = "";
       currentRoutes = [];
-      if (clearClick && searchMarker) {
-        map.removeLayer(searchMarker);
+      originalRoutes = [];
+      routeEditHistories = [];
+      editActionsElement.classList.add("hidden");
+      if (clearClick) {
+        if (searchMarker) map.removeLayer(searchMarker);
+        if (endSearchMarker) map.removeLayer(endSearchMarker);
         searchMarker = null;
-        clickedPoint = null;
+        endSearchMarker = null;
+        appState.points.start = null;
+        appState.points.end = null;
+        setInteraction(activeRouteType() === "pointToPoint"
+          ? INTERACTION.PICK_A
+          : INTERACTION.PICK_LOOP_START);
       }
       if (appReady) {
-        setStatus(
-          clearClick ? "Klik op de kaart om een zoekpunt te kiezen." : "Klaar om rondjes te zoeken.",
-          "ready"
-        );
+        const pointToPoint = activeRouteType() === "pointToPoint";
+        setStatus(clearClick
+          ? (pointToPoint
+            ? "Klik op de kaart om punt A te kiezen."
+            : "Klik op de kaart om een zoekpunt te kiezen.")
+          : (pointToPoint ? "Klaar om A→B-routes te zoeken." : "Klaar om rondjes te zoeken."),
+        "ready");
       }
     }
 
     function renderSourceData(geojson) {
       const lineFeatures = [];
-      const polygonFeatures = [];
       geojson.features.forEach(feature => {
         if (!feature || !feature.geometry) return;
         if (["LineString", "MultiLineString"].includes(feature.geometry.type)) {
           lineFeatures.push(feature);
-        } else if (["Polygon", "MultiPolygon"].includes(feature.geometry.type)) {
-          polygonFeatures.push(feature);
         }
       });
 
@@ -1876,21 +3013,7 @@
         }
       ).addTo(map);
 
-      polygonLayer = L.geoJSON(
-        { type: "FeatureCollection", features: polygonFeatures },
-        {
-          style: {
-            color: "#005db9",
-            weight: 2,
-            opacity: 0.9,
-            fillColor: "#5890db",
-            fillOpacity: 0.14
-          },
-          interactive: false
-        }
-      ).addTo(map);
-
-      const group = L.featureGroup([networkLayer, polygonLayer]);
+      const group = L.featureGroup([networkLayer]);
       if (group.getBounds().isValid()) {
         map.fitBounds(group.getBounds(), {
           padding: [25, 25],
@@ -1906,6 +3029,7 @@
     async function loadNetwork() {
       setStatus("GeoJSON laden en analyseren…", "loading");
       searchButton.disabled = true;
+      setInteraction(INTERACTION.SEARCHING);
       try {
         if (location.protocol === "file:") {
           throw new Error(
@@ -1914,23 +3038,21 @@
             "http://localhost:8000/."
           );
         }
-        const response = await fetch("./paden.geojson");
+        const response = await fetch("./Edge.geojson");
         if (!response.ok) {
           throw new Error(`GeoJSON kon niet worden geladen (HTTP ${response.status}).`);
         }
         const geojson = await response.json();
-        rawGeoJson = geojson;
         const report = inspectGeoJson(geojson);
+        const topologyReport = inspectEdgeTopology(geojson);
         normalizedData = normalizeGeoJson(geojson);
         renderSourceData(geojson);
 
-        setStatus("Kruisingen analyseren en routenetwerk bouwen…", "loading");
+        setStatus("FME-topologie in routenetwerk omzetten…", "loading");
         await new Promise(resolve => setTimeout(resolve, 30));
-        graph = buildGraph(normalizedData);
-
-        setStatus("Beloopbare polygonen met het netwerk verbinden…", "loading");
-        await new Promise(resolve => setTimeout(resolve, 30));
-        addPolygonConnections(graph, normalizedData.polygons);
+        baseGraph = buildGraph(normalizedData);
+        computeCyclicCore(baseGraph);
+        graph = cloneRoutingGraph(baseGraph);
 
         if (!graph.nodes.length || !graph.edges.length) {
           throw new Error("Er konden geen routeerbare lijnen uit het bestand worden opgebouwd.");
@@ -1939,14 +3061,18 @@
         searchButton.disabled = false;
         setStatus(
           `Klaar: ${numberNL.format(graph.nodes.length)} knooppunten en ` +
-          `${numberNL.format(graph.edges.length)} gerichte verbindingen. Klik op de kaart.`,
+          `${numberNL.format(graph.edges.length)} gerichte verbindingen. ` +
+          (activeRouteType() === "pointToPoint"
+            ? "Klik op de kaart om punt A te kiezen."
+            : "Klik op de kaart om een zoekpunt te kiezen."),
           "ready"
         );
         console.log("Volledig inspectierapport:", report);
+        console.log("FME-topologierapport:", topologyReport);
       } catch (error) {
         console.error("Fout bij het laden van het netwerk:", error);
         const serverHint = location.protocol === "file:" ? "" :
-          " Controleer of de server is gestart in dezelfde map als index.html en paden.geojson.";
+          " Controleer of de server is gestart in dezelfde map als index.html en Edge.geojson.";
         setStatus(`${error.message}${serverHint}`, "error");
         startBasemapLoading();
       }
@@ -1954,52 +3080,183 @@
 
     function handleMapClick(event) {
       if (!appReady) return;
-      clearSelection(false);
-      clickedPoint = event.latlng;
-      if (searchMarker) map.removeLayer(searchMarker);
-      searchMarker = L.marker(event.latlng, {
-        icon: L.divIcon({ className: "search-pin", html: "", iconSize: [24, 24] }),
-        zIndexOffset: 1100
-      }).addTo(map).bindTooltip("Aangeklikt zoekpunt");
-      setStatus("Zoekpunt gekozen. Stel de afstand in en klik op ‘Zoek rondjes’.", "ready");
+      switch (appState.interaction) {
+        case INTERACTION.EDIT_SOURCE: {
+          const route = currentRoutes[selectedRouteIndex];
+          const edgeIndex = route
+            ? findNearestRouteEdgeIndex(route, event.latlng, 35)
+            : null;
+          if (edgeIndex !== null) selectEditSource(edgeIndex, event.latlng);
+          else editHintElement.textContent =
+            "Tik dichter bij de gekleurde route om een onderdeel te kiezen.";
+          return;
+        }
+        case INTERACTION.EDIT_TARGET: {
+          const target = findNearestEditableBaseEdge(event.latlng, 35);
+          if (target) {
+            showEditTarget(target.baseId);
+            previewRouteDetour(target);
+          } else {
+            editHintElement.textContent =
+              "Tik dichter bij het pad waar de route langs moet lopen.";
+          }
+          return;
+        }
+        case INTERACTION.EDIT_PREVIEW:
+        case INTERACTION.SEARCHING:
+          return;
+        case INTERACTION.PICK_A:
+          clearSelection(false);
+          appState.points.start = event.latlng;
+          if (searchMarker) map.removeLayer(searchMarker);
+          searchMarker = L.marker(event.latlng, {
+            icon: L.divIcon({ className: "search-pin", html: "A", iconSize: [24, 24] }),
+            zIndexOffset: 1100
+          }).addTo(map).bindTooltip("Aangeklikt punt A");
+          setInteraction(appState.points.end ? INTERACTION.READY_AB : INTERACTION.PICK_B);
+          setStatus(appState.points.end
+            ? "Punt A gewijzigd. Klik op ‘Zoek routes’."
+            : "Punt A gekozen. Klik nu punt B op de kaart.", "ready");
+          return;
+        case INTERACTION.PICK_B:
+          clearSelection(false);
+          appState.points.end = event.latlng;
+          if (endSearchMarker) map.removeLayer(endSearchMarker);
+          endSearchMarker = L.marker(event.latlng, {
+            icon: L.divIcon({ className: "end-search-pin", html: "B", iconSize: [24, 24] }),
+            zIndexOffset: 1100
+          }).addTo(map).bindTooltip("Aangeklikt punt B");
+          setInteraction(INTERACTION.READY_AB);
+          setStatus("Punten A en B gekozen. Klik op ‘Zoek routes’.", "ready");
+          return;
+        case INTERACTION.READY_AB:
+          setStatus("Gebruik ‘A gekozen · wijzig’ of ‘B gekozen · wijzig’ om een punt te verplaatsen.", "ready");
+          return;
+        case INTERACTION.RESULTS:
+          setStatus("Kies een resultaat of ga terug om nieuwe punten te kiezen.", "ready");
+          return;
+        case INTERACTION.PICK_LOOP_START:
+        default:
+          clearSelection(false);
+          appState.points.start = event.latlng;
+          if (searchMarker) map.removeLayer(searchMarker);
+          searchMarker = L.marker(event.latlng, {
+            icon: L.divIcon({ className: "search-pin", html: "", iconSize: [24, 24] }),
+            zIndexOffset: 1100
+          }).addTo(map).bindTooltip("Aangeklikt zoekpunt");
+          setStatus("Zoekpunt gekozen. Stel de afstand in en klik op ‘Zoek rondjes’.", "ready");
+      }
     }
 
     async function handleSearch() {
+      endEditMode();
       showSearchView();
       if (!appReady) {
         setStatus("Het netwerk is nog niet gereed.", "error");
         return;
       }
-      if (!clickedPoint) {
-        setStatus("Klik eerst ergens op de kaart.", "error");
+      const routeType = activeRouteType();
+      const pointToPoint = routeType === "pointToPoint";
+      if (!appState.points.start || (pointToPoint && !appState.points.end)) {
+        setStatus(pointToPoint
+          ? "Klik eerst punt A en daarna punt B op de kaart."
+          : "Klik eerst ergens op de kaart.", "error");
         return;
       }
 
+      const preference = pointToPoint ? activeAbPreference() : "distance";
+      const needsTargetDistance = !pointToPoint || preference === "distance";
       const targetDistance = Number(document.getElementById("distanceInput").value);
       const tolerancePercent = Number(document.getElementById("toleranceInput").value);
       const searchRadius = Number(document.getElementById("radiusInput").value);
-      const mode = document.querySelector('input[name="startMode"]:checked').value;
-      if (!Number.isFinite(targetDistance) || targetDistance < 200) {
+      const maxResults = Number(document.getElementById("resultCountInput").value);
+      const mode = pointToPoint
+        ? "snap"
+        : document.querySelector('input[name="startMode"]:checked').value;
+      const maximumOverlap = document.getElementById("allowOverlapInput").checked
+        ? CONFIG.maxOverlap
+        : 0;
+      if (needsTargetDistance && (!Number.isFinite(targetDistance) || targetDistance < 200)) {
         setStatus("Voer een doelafstand van minimaal 200 meter in.", "error");
         return;
       }
-      if (!Number.isFinite(tolerancePercent) || tolerancePercent < 1 || tolerancePercent > 80) {
+      if (needsTargetDistance && (!Number.isFinite(tolerancePercent) ||
+          tolerancePercent < 1 || tolerancePercent > 80)) {
         setStatus("Voer een tolerantie tussen 1% en 80% in.", "error");
         return;
       }
-      if (!Number.isFinite(searchRadius) || searchRadius < 25) {
+      if (!pointToPoint && (!Number.isFinite(searchRadius) || searchRadius < 25)) {
         setStatus("Voer een zoekstraal van minimaal 25 meter in.", "error");
         return;
       }
+      if (!Number.isInteger(maxResults) || maxResults < 1 || maxResults > CONFIG.maxResults) {
+        setStatus(
+          `Kies een maximaal aantal ${pointToPoint ? "routes" : "rondjes"} ` +
+          `tussen 1 en ${CONFIG.maxResults}.`,
+          "error"
+        );
+        return;
+      }
+
+      if (pointToPoint) {
+        const clickDistance = turf.distance(
+          [appState.points.start.lng, appState.points.start.lat],
+          [appState.points.end.lng, appState.points.end.lat],
+          { units: "meters" }
+        );
+        if (clickDistance < 10) {
+          setStatus("Kies punten A en B minimaal 10 meter uit elkaar.", "error");
+          return;
+        }
+      }
 
       searchButton.disabled = true;
+      setInteraction(INTERACTION.SEARCHING);
       clearRouteLayers();
       resultsElement.innerHTML = "";
-      setStatus("Kandidaat-startpunten en gesloten rondjes onderzoeken…", "loading");
+      currentRoutes = [];
+      originalRoutes = [];
+      routeEditHistories = [];
+      setStatus(pointToPoint
+        ? "Punten op het netwerk plaatsen en A→B-routes onderzoeken…"
+        : "Kandidaat-startpunten en gesloten rondjes onderzoeken…", "loading");
       await new Promise(resolve => setTimeout(resolve, 30));
 
       try {
-        const clickCoord = [clickedPoint.lng, clickedPoint.lat];
+        resetRoutingGraph();
+        if (pointToPoint) {
+          const endpoints = preparePointToPointEndpoints(
+            appState.points.start,
+            appState.points.end
+          );
+          if (!endpoints) {
+            displayRoutes([], maximumOverlap);
+            return;
+          }
+          const tooFar = [endpoints.start, endpoints.end]
+            .find(endpoint => endpoint.distance > CONFIG.maxPointSnapDistance);
+          if (tooFar) {
+            setStatus(
+              `Punt ${tooFar === endpoints.start ? "A" : "B"} ligt meer dan ` +
+              `${CONFIG.maxPointSnapDistance} meter van het routenetwerk. Kies een punt dichter bij een pad.`,
+              "error"
+            );
+            return;
+          }
+          console.log("A→B-netwerkpunten:", endpoints);
+          const routes = generatePointToPointRoutes(
+            endpoints,
+            preference,
+            targetDistance,
+            tolerancePercent / 100,
+            maxResults,
+            maximumOverlap
+          );
+          displayRoutes(routes, maximumOverlap);
+          return;
+        }
+
+        const clickCoord = [appState.points.start.lng, appState.points.start.lat];
         let startCandidates;
         if (mode === "nearest") {
           const nearest = findNearestNode(clickCoord);
@@ -2013,7 +3270,7 @@
         }
 
         if (!startCandidates.length) {
-          displayRoutes([]);
+          displayRoutes([], maximumOverlap);
           setStatus(
             mode === "auto"
               ? `Geen geschikt cyclisch startpunt binnen ${numberNL.format(searchRadius)} meter gevonden.`
@@ -2028,14 +3285,21 @@
           startCandidates,
           targetDistance,
           tolerancePercent / 100,
-          mode === "nearest" ? Math.max(searchRadius, startCandidates[0].distance, 1) : searchRadius
+          mode === "nearest" ? Math.max(searchRadius, startCandidates[0].distance, 1) : searchRadius,
+          maxResults,
+          maximumOverlap
         );
-        displayRoutes(routes);
+        displayRoutes(routes, maximumOverlap);
       } catch (error) {
-        console.error("Fout tijdens het zoeken naar rondjes:", error);
+        console.error("Fout tijdens het zoeken naar routes:", error);
         setStatus(`Zoeken mislukt: ${error.message}`, "error");
       } finally {
         searchButton.disabled = false;
+        if (appState.interaction === INTERACTION.SEARCHING) {
+          setInteraction(pointToPoint
+            ? INTERACTION.READY_AB
+            : INTERACTION.PICK_LOOP_START);
+        }
       }
     }
 
@@ -2083,10 +3347,78 @@
 
     searchButton.addEventListener("click", handleSearch);
     clearButton.addEventListener("click", () => clearSelection(true));
-    backButton.addEventListener("click", () => {
-      showSearchView();
-      setStatus("Pas de voorwaarden aan en zoek opnieuw.", "ready");
+    advancedToggle.addEventListener("click", () => {
+      const expanded = formGridElement.classList.toggle("show-advanced");
+      advancedToggle.setAttribute("aria-expanded", String(expanded));
+      advancedToggle.textContent = expanded ? "Minder opties ▴" : "Meer opties ▾";
     });
+    chooseAButton.addEventListener("click", () => {
+      showSearchView();
+      clearSelection(false);
+      setInteraction(INTERACTION.PICK_A);
+      setStatus("Klik op de kaart om punt A te kiezen.", "ready");
+    });
+    chooseBButton.addEventListener("click", () => {
+      showSearchView();
+      clearSelection(false);
+      if (!appState.points.start) {
+        setInteraction(INTERACTION.PICK_A);
+        setStatus("Kies eerst punt A.", "error");
+      } else {
+        setInteraction(INTERACTION.PICK_B);
+        setStatus("Klik op de kaart om punt B te kiezen.", "ready");
+      }
+    });
+    document.querySelectorAll('input[name="routeType"]').forEach(input => {
+      input.addEventListener("change", () => {
+        updateInterfaceMode();
+        clearSelection(true);
+      });
+    });
+    document.querySelectorAll('input[name="abPreference"]').forEach(input => {
+      input.addEventListener("change", () => {
+        updateInterfaceMode();
+        clearSelection(false);
+        if (appState.points.start && appState.points.end) {
+          setStatus("Punten A en B staan klaar. Klik op ‘Zoek routes’.", "ready");
+        }
+      });
+    });
+    editRouteButton.addEventListener("click", () => {
+      if (isEditingRoute()) endEditMode();
+      else beginEditMode();
+    });
+    confirmEditButton.addEventListener("click", confirmEditPreview);
+    cancelEditButton.addEventListener("click", cancelEditPreview);
+    undoEditButton.addEventListener("click", () => {
+      const history = routeEditHistories[selectedRouteIndex] || [];
+      if (!history.length) return;
+      endEditMode();
+      const previousRoute = history.pop();
+      replaceDisplayedRoute(selectedRouteIndex, previousRoute, true);
+      setStatus("Laatste routeaanpassing ongedaan gemaakt.", "ready");
+    });
+    resetEditButton.addEventListener("click", () => {
+      const route = currentRoutes[selectedRouteIndex];
+      const original = originalRoutes[selectedRouteIndex];
+      if (!route || !original || routeSignature(route) === routeSignature(original)) return;
+      endEditMode();
+      routeEditHistories[selectedRouteIndex].push(cloneRoute(route));
+      replaceDisplayedRoute(selectedRouteIndex, cloneRoute(original), true);
+      setStatus("De oorspronkelijk gevonden route is hersteld.", "ready");
+    });
+    backButton.addEventListener("click", () => {
+      endEditMode();
+      showSearchView();
+      setInteraction(activeRouteType() === "pointToPoint"
+        ? (appState.points.end ? INTERACTION.READY_AB :
+          (appState.points.start ? INTERACTION.PICK_B : INTERACTION.PICK_A))
+        : INTERACTION.PICK_LOOP_START);
+      setStatus(activeRouteType() === "pointToPoint"
+        ? "Pas de routekeuze aan of kies nieuwe punten A en B."
+        : "Pas de voorwaarden aan en zoek opnieuw.", "ready");
+    });
+    updateInterfaceMode();
     initializeMap();
     loadNetwork();
   </script>
