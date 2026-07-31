@@ -455,6 +455,39 @@
 
     .hidden { display: none !important; }
 
+    .edit-advanced {
+      margin-top: 7px;
+      border-top: 1px solid var(--line);
+    }
+
+    .edit-advanced > summary {
+      padding: 7px 1px 3px;
+      color: #43566a;
+      font-size: 0.68rem;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .experimental-label {
+      display: inline-block;
+      margin-left: 4px;
+      padding: 1px 4px;
+      border: 1px solid #d6a243;
+      color: #704b05;
+      background: #fff6dc;
+      font-size: 0.55rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .edit-explanation {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 0.64rem;
+      line-height: 1.35;
+    }
+
     .edit-actions {
       display: grid;
       grid-template-columns: 1fr auto auto;
@@ -506,13 +539,44 @@
       line-height: 1.3;
     }
 
-    .edit-handle {
-      width: 16px;
-      height: 16px;
+    .edit-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 12px;
+      margin-top: 5px;
+      color: #53616d;
+      font-size: 0.62rem;
+    }
+
+    .edit-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .edit-key-current,
+    .edit-key-proposal {
+      width: 19px;
+      height: 0;
+      border-top: 3px solid #7b838a;
+    }
+
+    .edit-key-current { border-top-style: dashed; }
+    .edit-key-proposal { border-color: #00856a; }
+
+    .preview-waypoint-pin {
+      display: grid;
+      width: 22px !important;
+      height: 22px !important;
+      margin: -11px 0 0 -11px !important;
+      place-items: center;
       border: 3px solid #fff;
       border-radius: 50%;
+      color: #fff;
       background: var(--orange);
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.55);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+      font-size: 0.65rem;
+      font-weight: 900;
     }
 
     .route-card {
@@ -623,13 +687,18 @@
     .end-search-pin { background: #005db9; }
     .end-pin { background: #243f59; }
     .waypoint-pin {
-      width: 14px !important;
-      height: 14px !important;
-      margin: -7px 0 0 -7px !important;
+      display: grid;
+      width: 18px !important;
+      height: 18px !important;
+      margin: -9px 0 0 -9px !important;
+      place-items: center;
       border: 2px solid #fff;
       border-radius: 50%;
+      color: #fff;
       background: var(--orange);
       box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+      font-size: 0.56rem;
+      font-weight: 900;
     }
 
     @media (max-width: 640px) {
@@ -678,6 +747,7 @@
 
       .app-panel.results-mode .results { margin-top: 6px; }
       .app-panel.results-mode .edit-actions { margin-top: 5px; }
+      .app-panel.results-mode .edit-advanced { margin-top: 5px; }
       .app-panel.results-mode .route-card:not(.selected) .route-meta { display: none; }
       .app-panel.results-mode .route-card { padding: 6px 8px; }
       .map-key { display: none; }
@@ -687,6 +757,10 @@
 
     .app-panel.editing-route .route-card:not(.selected) {
       display: none;
+    }
+
+    .app-panel.editing-route .route-card.selected {
+      pointer-events: none;
     }
   </style>
 </head>
@@ -812,14 +886,29 @@
         </div>
         <button id="backButton" type="button">← Terug</button>
       </div>
-      <div id="editActions" class="edit-actions hidden">
-        <button id="editRouteButton" class="normal-edit-action" type="button">Route aanpassen</button>
-        <button id="undoEditButton" class="normal-edit-action" type="button" disabled>Ongedaan</button>
-        <button id="resetEditButton" class="normal-edit-action" type="button" disabled>Herstel</button>
-        <button id="confirmEditButton" class="preview-edit-action" type="button">Bevestig wijziging</button>
-        <button id="cancelEditButton" class="preview-edit-action" type="button">Annuleer</button>
-      </div>
-      <div id="editHint" class="edit-hint hidden" role="status" aria-live="polite"></div>
+      <details id="editAdvanced" class="edit-advanced hidden">
+        <summary>
+          Geavanceerd: route aanpassen
+          <span class="experimental-label">experimenteel</span>
+        </summary>
+        <p class="edit-explanation">
+          Klik één of meer paden aan waar de route langs moet lopen. Bevestig pas wanneer
+          alle via-punten goed staan; controleer het voorstel altijd op de kaart.
+        </p>
+        <div id="editActions" class="edit-actions">
+          <button id="editRouteButton" class="normal-edit-action" type="button">Kies een via-punt</button>
+          <button id="undoEditButton" class="normal-edit-action" type="button" disabled>Vorige versie</button>
+          <button id="resetEditButton" class="normal-edit-action" type="button" disabled>Originele route</button>
+          <button id="confirmEditButton" class="preview-edit-action" type="button">Gebruik voorstel</button>
+          <button id="cancelEditButton" class="preview-edit-action" type="button">Behoud huidige route</button>
+        </div>
+        <div id="editHint" class="edit-hint hidden" role="status" aria-live="polite"></div>
+        <div id="editLegend" class="edit-legend hidden" aria-label="Legenda routevoorstel">
+          <span><i class="edit-key-current"></i> Huidige route</span>
+          <span><i class="edit-key-proposal"></i> Voorstel</span>
+          <span><i class="key-click"></i> Via-punt</span>
+        </div>
+      </details>
       <section id="results" class="results"></section>
     </section>
   </main>
@@ -844,7 +933,9 @@
       overlapPenalties: [3, 6, 12, 25],
       maxRouteCalculations: 150,
       maxResults: 10,
-      maxPointSnapDistance: 250
+      maxPointSnapDistance: 250,
+      maxEditWaypoints: 5,
+      editPreservationPenalties: [1.3, 1.7, 2.3, 3.2]
     });
 
     const ROUTE_COLORS = [
@@ -858,7 +949,6 @@
       READY_AB: "READY_AB",
       SEARCHING: "SEARCHING",
       RESULTS: "RESULTS",
-      EDIT_SOURCE: "EDIT_SOURCE",
       EDIT_TARGET: "EDIT_TARGET",
       EDIT_PREVIEW: "EDIT_PREVIEW"
     });
@@ -866,7 +956,6 @@
       interaction: INTERACTION.PICK_LOOP_START,
       points: { start: null, end: null },
       edit: {
-        sourceEdgeIndex: null,
         previewRoute: null,
         previewLayer: null,
         graphBeforePreview: null
@@ -894,11 +983,7 @@
     let originalRoutes = [];
     let routeEditHistories = [];
     let selectedRouteIndex = 0;
-    let editHitLayers = [];
-    let editSourceHighlight = null;
-    let editTargetHighlight = null;
-    let editHandleMarker = null;
-    let editHandleOrigin = null;
+    let editLayerGroup = null;
     let networkLayer = null;
     let appReady = false;
     let startBasemapLoading = () => {};
@@ -908,6 +993,7 @@
     const searchButton = document.getElementById("searchButton");
     const clearButton = document.getElementById("clearButton");
     const backButton = document.getElementById("backButton");
+    const editAdvancedElement = document.getElementById("editAdvanced");
     const editActionsElement = document.getElementById("editActions");
     const editRouteButton = document.getElementById("editRouteButton");
     const undoEditButton = document.getElementById("undoEditButton");
@@ -915,6 +1001,7 @@
     const confirmEditButton = document.getElementById("confirmEditButton");
     const cancelEditButton = document.getElementById("cancelEditButton");
     const editHintElement = document.getElementById("editHint");
+    const editLegendElement = document.getElementById("editLegend");
     const resultsSummaryElement = document.getElementById("resultsSummary");
     const appPanel = document.querySelector(".app-panel");
     const mapWarningElement = document.getElementById("mapWarning");
@@ -935,7 +1022,6 @@
 
     function isEditingRoute() {
       return [
-        INTERACTION.EDIT_SOURCE,
         INTERACTION.EDIT_TARGET,
         INTERACTION.EDIT_PREVIEW
       ].includes(appState.interaction);
@@ -1737,11 +1823,14 @@
       prevEdge.fill(-1);
       const heap = new MinHeap();
       const penalizedBaseEdges = options.penalizedBaseEdges || new Set();
+      const penalizedPhysicalBaseEdges = options.penalizedPhysicalBaseEdges || new Set();
       const blockedBaseEdges = options.blockedBaseEdges || new Set();
       const blockedLogicalBaseEdges = options.blockedLogicalBaseEdges || new Set();
       const blockedDirectedEdges = options.blockedDirectedEdges || new Set();
       const blockedNodes = options.blockedNodes || new Set();
+      const preferredBaseEdges = options.preferredBaseEdges || new Set();
       const overlapPenalty = Number(options.overlapPenalty) || 1;
+      const offPreferredPenalty = Number(options.offPreferredPenalty) || 1;
       const maxDistance = Number(options.maxDistance) || Infinity;
       dist[startNodeId] = 0;
       heap.push({ nodeId: startNodeId, priority: 0 });
@@ -1759,7 +1848,15 @@
               blockedLogicalBaseEdges.has(routeBaseId)) continue;
           if (blockedDirectedEdges.has(edge.id)) continue;
           if (blockedNodes.has(edge.to) && edge.to !== targetNodeId) continue;
-          const factor = penalizedBaseEdges.has(routeBaseId) ? overlapPenalty : 1;
+          const reuseFactor = penalizedBaseEdges.has(routeBaseId) ||
+            penalizedPhysicalBaseEdges.has(edge.baseId)
+            ? overlapPenalty
+            : 1;
+          const preservationFactor = preferredBaseEdges.size &&
+            !preferredBaseEdges.has(routeBaseId)
+            ? offPreferredPenalty
+            : 1;
+          const factor = reuseFactor * preservationFactor;
           const nextDistance = current.priority + edge.length * factor;
           if (nextDistance < dist[edge.to] && nextDistance <= maxDistance) {
             dist[edge.to] = nextDistance;
@@ -2015,20 +2112,11 @@
         graph = appState.edit.graphBeforePreview;
         appState.edit.graphBeforePreview = null;
       }
-      editHitLayers.forEach(layer => map.removeLayer(layer));
-      editHitLayers = [];
-      [editSourceHighlight, editTargetHighlight, editHandleMarker].forEach(layer => {
-        if (layer) map.removeLayer(layer);
-      });
-      editSourceHighlight = null;
-      editTargetHighlight = null;
-      editHandleMarker = null;
-      editHandleOrigin = null;
-      appState.edit.sourceEdgeIndex = null;
-      if (appState.edit.previewLayer) map.removeLayer(appState.edit.previewLayer);
+      if (editLayerGroup) editLayerGroup.clearLayers();
       appState.edit.previewLayer = null;
       appState.edit.previewRoute = null;
       editActionsElement.classList.remove("previewing");
+      editLegendElement.classList.add("hidden");
     }
 
     function hideUnselectedRoutesForEditing() {
@@ -2042,22 +2130,64 @@
 
     function restoreRoutesAfterEditing() {
       appPanel.classList.remove("editing-route");
+      waypointMarkers.forEach(marker => {
+        if (!map.hasLayer(marker)) marker.addTo(map);
+      });
       const selectedLayer = routeLayers[selectedRouteIndex];
       if (selectedLayer && map.hasLayer(selectedLayer.line)) {
+        selectedLayer.halo.setStyle({
+          color: "#fff",
+          weight: 12,
+          opacity: 0.94,
+          dashArray: null
+        });
+        selectedLayer.line.setStyle({
+          color: ROUTE_COLORS[selectedRouteIndex % ROUTE_COLORS.length],
+          weight: 7,
+          opacity: 1,
+          dashArray: null
+        });
         selectedLayer.halo.bringToFront();
         selectedLayer.line.bringToFront();
       }
     }
 
+    function showCurrentRouteAsComparison() {
+      const selectedLayer = routeLayers[selectedRouteIndex];
+      if (!selectedLayer) return;
+      if (!map.hasLayer(selectedLayer.halo)) selectedLayer.halo.addTo(map);
+      if (!map.hasLayer(selectedLayer.line)) selectedLayer.line.addTo(map);
+      selectedLayer.halo.setStyle({
+        color: "#fff",
+        weight: 9,
+        opacity: 0.9,
+        dashArray: null
+      });
+      selectedLayer.line.setStyle({
+        color: "#7b838a",
+        weight: 5,
+        opacity: 0.82,
+        dashArray: "7 7"
+      });
+      selectedLayer.halo.bringToFront();
+      selectedLayer.line.bringToFront();
+    }
+
     function updateEditControls() {
       const route = currentRoutes[selectedRouteIndex];
-      editActionsElement.classList.toggle("hidden", !route);
+      editAdvancedElement.classList.toggle("hidden", !route);
       if (!route) return;
       const history = routeEditHistories[selectedRouteIndex] || [];
       undoEditButton.disabled = history.length === 0;
       const original = originalRoutes[selectedRouteIndex];
       resetEditButton.disabled = !original ||
         routeSignature(route) === routeSignature(original);
+      const waypointLimitReached = (route.waypoints || []).length >=
+        CONFIG.maxEditWaypoints;
+      editRouteButton.disabled = waypointLimitReached;
+      editRouteButton.title = waypointLimitReached
+        ? `Maximaal ${CONFIG.maxEditWaypoints} via-punten per route.`
+        : "";
     }
 
     function endEditMode() {
@@ -2070,23 +2200,13 @@
             (appState.points.start ? INTERACTION.PICK_B : INTERACTION.PICK_A))
           : INTERACTION.PICK_LOOP_START));
       editRouteButton.classList.remove("active");
-      editRouteButton.textContent = "Route aanpassen";
+      editRouteButton.textContent = "Kies een via-punt";
       editHintElement.classList.add("hidden");
       updateEditControls();
     }
 
-    function showEditTarget(baseId) {
-      if (editTargetHighlight) map.removeLayer(editTargetHighlight);
-      const base = graph.baseEdges[baseId];
-      if (!base) return;
-      editTargetHighlight = L.polyline(
-        base.coordinates.map(coord => [coord[1], coord[0]]),
-        { color: "#00856a", weight: 7, opacity: 0.92, interactive: false }
-      ).addTo(map);
-    }
-
     function findNearestEditableBaseEdge(latLng, maximumDistance = 60) {
-      const route = currentRoutes[selectedRouteIndex];
+      const route = appState.edit.previewRoute || currentRoutes[selectedRouteIndex];
       if (!route) return null;
       const used = new Set(route.edges.map(logicalBaseId));
       const point = turf.point([latLng.lng, latLng.lat]);
@@ -2110,6 +2230,16 @@
         }
       });
       return nearest;
+    }
+
+    function chooseEditTarget(latLng) {
+      const target = findNearestEditableBaseEdge(latLng, 35);
+      if (target) {
+        previewRouteDetour(target);
+      } else {
+        editHintElement.textContent =
+          "Klik dichter bij een pad dat nog geen deel van de huidige route is.";
+      }
     }
 
     function addWaypointAtNetworkPosition(target) {
@@ -2171,9 +2301,28 @@
       return { nodeId, coord, originalBaseId: base.id, kind: "user" };
     }
 
-    function buildRouteThroughWaypoints(route, sourceEdgeIndex, newWaypoint) {
-      const sourceEdge = route.edges[sourceEdgeIndex];
-      if (!sourceEdge || !newWaypoint) return null;
+    function routeDifferenceRatio(referenceEdges, candidateEdges) {
+      const usage = edges => {
+        const lengths = new Map();
+        edges.forEach(edge => {
+          const baseId = logicalBaseId(edge);
+          lengths.set(baseId, (lengths.get(baseId) || 0) + edge.length);
+        });
+        return lengths;
+      };
+      const referenceUsage = usage(referenceEdges);
+      const candidateUsage = usage(candidateEdges);
+      let sharedLength = 0;
+      referenceUsage.forEach((length, baseId) => {
+        sharedLength += Math.min(length, candidateUsage.get(baseId) || 0);
+      });
+      const referenceLength = referenceEdges.reduce((sum, edge) => sum + edge.length, 0);
+      const candidateLength = candidateEdges.reduce((sum, edge) => sum + edge.length, 0);
+      return 1 - sharedLength / Math.max(referenceLength, candidateLength, 1);
+    }
+
+    function buildRouteThroughWaypoints(route, newWaypoint, referenceRoute = route) {
+      if (!route || !newWaypoint) return null;
       const allowOverlap = document.getElementById("allowOverlapInput").checked;
       const targetDistance = Number(document.getElementById("distanceInput").value) || route.length;
       const searchRadius = Number(document.getElementById("radiusInput").value) ||
@@ -2182,118 +2331,109 @@
         ? route.endNodeId
         : route.startNodeId;
       const existingWaypoints = [...(route.waypoints || [])];
-      const legEnds = route.legEndEdgeIndexes || [];
-      let insertIndex = existingWaypoints.length;
-      if (legEnds.length) {
-        const legIndex = legEnds.findIndex(edgeEnd => sourceEdgeIndex < edgeEnd);
-        if (legIndex >= 0) insertIndex = legIndex;
-      }
-      const waypoints = [...existingWaypoints];
-      waypoints.splice(insertIndex, 0, newWaypoint);
       const candidates = [];
+      const preferredBaseIds = new Set(route.edges.map(logicalBaseId));
 
-      CONFIG.overlapPenalties.forEach(overlapPenalty => {
-        const usedBaseIds = new Set();
-        const blockedWaypointBases = new Set(
-          waypoints.map(waypoint => waypoint.originalBaseId)
-        );
-        blockedWaypointBases.add(logicalBaseId(sourceEdge));
-        const sequence = [
-          route.startNodeId,
-          ...waypoints.map(waypoint => waypoint.nodeId),
-          endNodeId
-        ];
-        const edges = [];
-        const nodes = [route.startNodeId];
-        const candidateLegEnds = [];
+      for (let insertIndex = 0; insertIndex <= existingWaypoints.length; insertIndex++) {
+        const waypoints = [...existingWaypoints];
+        waypoints.splice(insertIndex, 0, newWaypoint);
 
-        for (let index = 1; index < sequence.length; index++) {
-          const from = sequence[index - 1];
-          const to = sequence[index];
-          if (from === to) {
+        CONFIG.overlapPenalties.forEach((overlapPenalty, penaltyIndex) => {
+          const usedBaseEdgeIds = new Set();
+          const blockedWaypointBases = new Set(
+            waypoints.map(waypoint => waypoint.originalBaseId)
+          );
+          const sequence = [
+            route.startNodeId,
+            ...waypoints.map(waypoint => waypoint.nodeId),
+            endNodeId
+          ];
+          const edges = [];
+          const nodes = [route.startNodeId];
+          const candidateLegEnds = [];
+
+          for (let index = 1; index < sequence.length; index++) {
+            const from = sequence[index - 1];
+            const to = sequence[index];
+            if (from === to) {
+              candidateLegEnds.push(edges.length);
+              continue;
+            }
+            const blockedBaseEdges = new Set(blockedWaypointBases);
+            if (!allowOverlap) {
+              usedBaseEdgeIds.forEach(baseId => blockedBaseEdges.add(baseId));
+            }
+            const result = dijkstra(from, to, {
+              blockedBaseEdges,
+              penalizedPhysicalBaseEdges: usedBaseEdgeIds,
+              overlapPenalty,
+              preferredBaseEdges: preferredBaseIds,
+              offPreferredPenalty: CONFIG.editPreservationPenalties[penaltyIndex]
+            });
+            if (!result.path) return;
+            result.path.edges.forEach(edge => usedBaseEdgeIds.add(edge.baseId));
+            edges.push(...result.path.edges);
+            nodes.push(...result.path.nodes.slice(1));
             candidateLegEnds.push(edges.length);
-            continue;
           }
-          const blockedBaseEdges = new Set(blockedWaypointBases);
-          const blockedLogicalBaseEdges = new Set([logicalBaseId(sourceEdge)]);
-          if (!allowOverlap) {
-            usedBaseIds.forEach(baseId => blockedLogicalBaseEdges.add(baseId));
+          if (!validateRouteEdgeChain(route, edges)) return;
+          if (!edges.some(edge => logicalBaseId(edge) === newWaypoint.originalBaseId)) return;
+          const length = edges.reduce((sum, edge) => sum + edge.length, 0);
+          const overlapLength = calculateOverlap(edges);
+          const overlapRatio = overlapLength / Math.max(length, 1);
+          if ((!allowOverlap && overlapRatio > 1e-9) ||
+              (allowOverlap && overlapRatio > CONFIG.maxOverlap + 1e-9)) return;
+          const checkedNodes = route.routeType === "pointToPoint"
+            ? nodes
+            : nodes.slice(0, -1);
+          const repeatedNodes = checkedNodes.length - new Set(checkedNodes).size;
+          if (!allowOverlap && repeatedNodes > 0) return;
+          const immediateTurnaround = edges.some((edge, index) =>
+            index > 0 && logicalBaseId(edge) === logicalBaseId(edges[index - 1])
+          );
+          const candidate = {
+            ...route,
+            waypoints,
+            legEndEdgeIndexes: candidateLegEnds,
+            edges,
+            nodes,
+            length,
+            overlapLength,
+            immediateTurnaroundPenalty: immediateTurnaround ? 0.75 : 0,
+            edited: true
+          };
+          if (route.routeType === "pointToPoint") {
+            const referenceDistance = route.routePreference === "shortest"
+              ? route.shortestLength
+              : targetDistance;
+            Object.assign(candidate, scorePointToPointRoute(
+              candidate,
+              referenceDistance,
+              route.snapSearchRadius || searchRadius
+            ));
+          } else {
+            Object.assign(candidate, scoreRoute(candidate, targetDistance, searchRadius));
           }
-          const result = dijkstra(from, to, {
-            blockedBaseEdges,
-            blockedLogicalBaseEdges,
-            penalizedBaseEdges: usedBaseIds,
-            overlapPenalty
-          });
-          if (!result.path) return;
-          result.path.edges.forEach(edge => usedBaseIds.add(logicalBaseId(edge)));
-          edges.push(...result.path.edges);
-          nodes.push(...result.path.nodes.slice(1));
-          candidateLegEnds.push(edges.length);
-        }
-        if (!validateRouteEdgeChain(route, edges)) return;
-        const length = edges.reduce((sum, edge) => sum + edge.length, 0);
-        const overlapLength = calculateOverlap(edges);
-        const overlapRatio = overlapLength / Math.max(length, 1);
-        if ((!allowOverlap && overlapRatio > 1e-9) ||
-            (allowOverlap && overlapRatio > CONFIG.maxOverlap + 1e-9)) return;
-        const checkedNodes = route.routeType === "pointToPoint" ? nodes : nodes.slice(0, -1);
-        const repeatedNodes = checkedNodes.length - new Set(checkedNodes).size;
-        if (!allowOverlap && repeatedNodes > 0) return;
-        const immediateTurnaround = edges.some((edge, index) =>
-          index > 0 && logicalBaseId(edge) === logicalBaseId(edges[index - 1])
-        );
-        const candidate = {
-          ...route,
-          waypoints,
-          legEndEdgeIndexes: candidateLegEnds,
-          edges,
-          nodes,
-          length,
-          overlapLength,
-          immediateTurnaroundPenalty: immediateTurnaround ? 0.75 : 0,
-          edited: true
-        };
-        if (route.routeType === "pointToPoint") {
-          const referenceDistance = route.routePreference === "shortest"
-            ? route.shortestLength
-            : targetDistance;
-          Object.assign(candidate, scorePointToPointRoute(
-            candidate,
-            referenceDistance,
-            route.snapSearchRadius || searchRadius
-          ));
-        } else {
-          Object.assign(candidate, scoreRoute(candidate, targetDistance, searchRadius));
-        }
-        candidate.score += repeatedNodes * 0.4;
-        candidate.coordinates = routeCoordinates(candidate.startNodeId, edges);
-        candidates.push(candidate);
-      });
+          candidate.editDistanceDeviation = Math.abs(
+            length - referenceRoute.length
+          ) / Math.max(referenceRoute.length, 1);
+          candidate.routeChangeRatio = routeDifferenceRatio(
+            referenceRoute.edges,
+            edges
+          );
+          candidate.score =
+            8 * candidate.editDistanceDeviation +
+            5 * candidate.routeChangeRatio +
+            4 * candidate.overlapRatio +
+            candidate.immediateTurnaroundPenalty +
+            repeatedNodes * 0.4;
+          candidate.coordinates = routeCoordinates(candidate.startNodeId, edges);
+          candidates.push(candidate);
+        });
+      }
 
       return removeDuplicateRoutes(candidates)
         .sort((a, b) => a.score - b.score)[0] || null;
-    }
-
-    function findNearestRouteEdgeIndex(route, latLng, maximumDistance = 30) {
-      const point = turf.point([latLng.lng, latLng.lat]);
-      let nearestIndex = null;
-      let nearestDistance = Infinity;
-      route.edges.forEach((edge, edgeIndex) => {
-        const coordinates = directedEdgeCoordinates(edge);
-        if (coordinates.length < 2) return;
-        const snapped = turf.nearestPointOnLine(
-          turf.lineString(coordinates),
-          point,
-          { units: "meters" }
-        );
-        const distance = Number(snapped.properties.dist);
-        if (Number.isFinite(distance) && distance < nearestDistance) {
-          nearestDistance = distance;
-          nearestIndex = edgeIndex;
-        }
-      });
-      return nearestDistance <= maximumDistance ? nearestIndex : null;
     }
 
     function stopLeafletClick(event) {
@@ -2302,133 +2442,102 @@
       }
     }
 
-    function selectEditSource(edgeIndex, latLng) {
-      const route = currentRoutes[selectedRouteIndex];
-      const edge = route && route.edges[edgeIndex];
-      if (!edge) return;
-      appState.edit.sourceEdgeIndex = edgeIndex;
-      setInteraction(INTERACTION.EDIT_TARGET);
-      if (editSourceHighlight) map.removeLayer(editSourceHighlight);
-      if (editHandleMarker) map.removeLayer(editHandleMarker);
-      if (editTargetHighlight) map.removeLayer(editTargetHighlight);
-      editTargetHighlight = null;
-
-      const coordinates = directedEdgeCoordinates(edge);
-      editSourceHighlight = L.polyline(
-        coordinates.map(coord => [coord[1], coord[0]]),
-        { color: "#e56a00", weight: 8, opacity: 1, interactive: false }
-      ).addTo(map);
-      const snapped = turf.nearestPointOnLine(
-        turf.lineString(coordinates),
-        turf.point([latLng.lng, latLng.lat]),
-        { units: "meters" }
-      );
-      const handleLatLng = L.latLng(
-        snapped.geometry.coordinates[1],
-        snapped.geometry.coordinates[0]
-      );
-      editHandleOrigin = handleLatLng;
-      editHandleMarker = L.marker(handleLatLng, {
-        draggable: true,
-        zIndexOffset: 1400,
-        icon: L.divIcon({ className: "edit-handle", html: "", iconSize: [22, 22] })
-      }).addTo(map);
-      editHandleMarker.on("drag", event => {
-        const nearest = findNearestEditableBaseEdge(event.target.getLatLng());
-        if (nearest) showEditTarget(nearest.baseId);
-        else if (editTargetHighlight) {
-          map.removeLayer(editTargetHighlight);
-          editTargetHighlight = null;
-        }
-      });
-      editHandleMarker.on("dragend", event => {
-        const nearest = findNearestEditableBaseEdge(event.target.getLatLng());
-        if (nearest) {
-          event.target.setLatLng(nearest.latLng);
-          previewRouteDetour(nearest);
-        } else {
-          event.target.setLatLng(editHandleOrigin);
-          editHintElement.textContent = "Geen ander pad binnen 60 meter gevonden.";
-        }
-      });
-      editHintElement.textContent =
-        "Sleep het oranje punt naar een ander pad, of tik dat pad op de kaart.";
-    }
-
     function beginEditMode() {
       const route = currentRoutes[selectedRouteIndex];
       if (!route) return;
       clearEditLayers();
-      setInteraction(INTERACTION.EDIT_SOURCE);
+      setInteraction(INTERACTION.EDIT_TARGET);
       hideUnselectedRoutesForEditing();
+      showCurrentRouteAsComparison();
       editRouteButton.classList.add("active");
       editRouteButton.textContent = "Stop aanpassen";
-      editHintElement.textContent = "Tik eerst op het routeonderdeel dat je wilt vervangen.";
+      editHintElement.textContent =
+        "Klik op een pad waar de route langs moet lopen. Je kunt daarna direct meer via-punten toevoegen.";
       editHintElement.classList.remove("hidden");
-
-      route.edges.forEach((edge, edgeIndex) => {
-        const sourceLayer = L.polyline(
-          directedEdgeCoordinates(edge).map(coord => [coord[1], coord[0]]),
-          { color: "#dd001c", weight: 18, opacity: 0.01, bubblingMouseEvents: false }
-        ).addTo(map);
-        sourceLayer.on("click", event => {
-          stopLeafletClick(event);
-          selectEditSource(edgeIndex, event.latlng);
-        });
-        editHitLayers.push(sourceLayer);
-      });
+      editLegendElement.classList.remove("hidden");
     }
 
     function previewRouteDetour(target) {
-      const route = currentRoutes[selectedRouteIndex];
-      if (!route || appState.edit.sourceEdgeIndex === null) return;
+      const confirmedRoute = currentRoutes[selectedRouteIndex];
+      const route = appState.edit.previewRoute || confirmedRoute;
+      if (!route || !confirmedRoute) return;
+      if ((route.waypoints || []).length >= CONFIG.maxEditWaypoints) {
+        editHintElement.textContent =
+          `Dit concept heeft al ${CONFIG.maxEditWaypoints} via-punten. ` +
+          "Gebruik het voorstel of behoud de huidige route.";
+        return;
+      }
       editHintElement.textContent = "Voorbeeld wordt berekend…";
-      const graphSnapshot = cloneRoutingGraph(graph);
+      const attemptGraphSnapshot = cloneRoutingGraph(graph);
       const waypoint = addWaypointAtNetworkPosition(target);
       const editedRoute = buildRouteThroughWaypoints(
         route,
-        appState.edit.sourceEdgeIndex,
-        waypoint
+        waypoint,
+        confirmedRoute
       );
       if (!editedRoute) {
-        graph = graphSnapshot;
-        const openRoute = route.routeType === "pointToPoint";
-        editHintElement.textContent = document.getElementById("allowOverlapInput").checked
-          ? `Langs dit pad is geen geldige ${openRoute ? "A→B-" : "gesloten "}omleiding met maximaal 35% overlap gevonden.`
-          : `Langs dit pad is geen ${openRoute ? "A→B-" : "gesloten "}omleiding zonder overlap gevonden.`;
+        graph = attemptGraphSnapshot;
+        editHintElement.textContent =
+          "Via dit pad kan geen goede doorlopende route worden gemaakt. " +
+          (appState.edit.previewRoute
+            ? "Het bestaande voorstel blijft staan; kies eventueel een ander pad."
+            : "Kies een ander pad.");
         return;
       }
-      editHitLayers.forEach(layer => map.removeLayer(layer));
-      editHitLayers = [];
-      appState.edit.graphBeforePreview = graphSnapshot;
+      if (!appState.edit.graphBeforePreview) {
+        appState.edit.graphBeforePreview = attemptGraphSnapshot;
+      }
       appState.edit.previewRoute = editedRoute;
+      if (editLayerGroup) editLayerGroup.clearLayers();
+      waypointMarkers.forEach(marker => {
+        if (map.hasLayer(marker)) map.removeLayer(marker);
+      });
       appState.edit.previewLayer = L.polyline(
         editedRoute.coordinates.map(coord => [coord[1], coord[0]]),
         {
           color: "#00856a",
           weight: 7,
-          opacity: 0.95,
-          dashArray: "8 6",
+          opacity: 1,
           lineCap: "round",
           lineJoin: "round",
           interactive: false
         }
-      ).addTo(map);
+      );
+      editLayerGroup.addLayer(appState.edit.previewLayer);
+      editedRoute.waypoints.forEach((draftWaypoint, waypointIndex) => {
+        editLayerGroup.addLayer(L.marker(
+          [draftWaypoint.coord[1], draftWaypoint.coord[0]],
+          {
+            zIndexOffset: 1500,
+            interactive: false,
+            icon: L.divIcon({
+              className: "preview-waypoint-pin",
+              html: String(waypointIndex + 1),
+              iconSize: [22, 22]
+            })
+          }
+        ).bindTooltip(`Via-punt ${waypointIndex + 1}`));
+      });
       editActionsElement.classList.add("previewing");
       setInteraction(INTERACTION.EDIT_PREVIEW);
       const tolerance = Number(document.getElementById("toleranceInput").value) / 100;
-      const usesTolerance = route.routeType !== "pointToPoint" ||
-        route.routePreference === "distance";
+      const usesTolerance = confirmedRoute.routeType !== "pointToPoint" ||
+        confirmedRoute.routePreference === "distance";
       const toleranceWarning = usesTolerance &&
         Number.isFinite(tolerance) &&
-        editedRoute.distanceDeviation > tolerance
-        ? " Buiten de ingestelde tolerantie."
+        editedRoute.editDistanceDeviation > tolerance
+        ? " Het voorstel wijkt meer van de huidige afstand af dan de ingestelde marge."
         : "";
+      const lengthDifference = Math.round(editedRoute.length - confirmedRoute.length);
+      const lengthComparison = Math.abs(lengthDifference) < 1
+        ? "ongeveer even lang"
+        : `${numberNL.format(Math.abs(lengthDifference))} meter ` +
+          (lengthDifference > 0 ? "langer" : "korter");
       editHintElement.textContent =
-        `Voorbeeld: ${numberNL.format(editedRoute.length)} meter · ` +
-        `afwijking ${decimalNL.format(editedRoute.distanceDeviation * 100)}% · ` +
-        `overlap ${decimalNL.format(editedRoute.overlapRatio * 100)}%.` +
-        toleranceWarning;
+        `Voorstel: ${numberNL.format(editedRoute.length)} meter ` +
+        `(${lengthComparison} dan de huidige route).` +
+        toleranceWarning +
+        " Klik nog een ander pad aan om een extra via-punt toe te voegen.";
       map.fitBounds(appState.edit.previewLayer.getBounds(), {
         padding: [42, 42],
         maxZoom: 17
@@ -2445,14 +2554,14 @@
       endEditMode();
       replaceDisplayedRoute(routeIndex, preview, true);
       setStatus(
-        "Route via het waypoint herberekend. Afstand en overlap zijn bijgewerkt.",
+        "Het voorstel is gebruikt. Je kunt nog een via-punt toevoegen of teruggaan naar de vorige versie.",
         "ready"
       );
     }
 
     function cancelEditPreview() {
       endEditMode();
-      setStatus("De routewijziging is geannuleerd.", "ready");
+      setStatus("De huidige route is behouden.", "ready");
     }
 
     function removeDuplicateRoutes(routes) {
@@ -2730,6 +2839,7 @@
     }
 
     function clearRouteLayers() {
+      if (editLayerGroup) editLayerGroup.clearLayers();
       routeLayers.forEach(routeLayer => {
         map.removeLayer(routeLayer.halo);
         map.removeLayer(routeLayer.line);
@@ -2799,9 +2909,7 @@
       line.on("click", event => {
         stopLeafletClick(event);
         if (isEditingRoute() && index === selectedRouteIndex) {
-          if (appState.interaction === INTERACTION.EDIT_PREVIEW) return;
-          const edgeIndex = findNearestRouteEdgeIndex(route, event.latlng);
-          if (edgeIndex !== null) selectEditSource(edgeIndex, event.latlng);
+          chooseEditTarget(event.latlng);
           return;
         }
         showResultsView(currentRoutes.length);
@@ -2858,7 +2966,11 @@
       waypointMarkers.forEach(marker => map.removeLayer(marker));
       waypointMarkers = (route.waypoints || []).map((waypoint, waypointIndex) =>
         L.marker([waypoint.coord[1], waypoint.coord[0]], {
-          icon: L.divIcon({ className: "waypoint-pin", html: "", iconSize: [14, 14] }),
+          icon: L.divIcon({
+            className: "waypoint-pin",
+            html: String(waypointIndex + 1),
+            iconSize: [18, 18]
+          }),
           zIndexOffset: 1200,
           interactive: false
         }).addTo(map).bindTooltip(`Waypoint ${waypointIndex + 1}`)
@@ -2913,9 +3025,10 @@
       currentRoutes = routes;
       originalRoutes = routes.map(cloneRoute);
       routeEditHistories = routes.map(() => []);
+      editAdvancedElement.open = false;
 
       if (!routes.length) {
-        editActionsElement.classList.add("hidden");
+        editAdvancedElement.classList.add("hidden");
         showSearchView();
         setInteraction(activeRouteType() === "pointToPoint"
           ? (appState.points.end ? INTERACTION.READY_AB :
@@ -2928,8 +3041,8 @@
             ? "Geen geschikte A→B-route gevonden. Kies andere punten A en B."
             : "Geen geschikte A→B-route gevonden. Kies andere punten of verruim afstand en tolerantie.")
           : (maxOverlap === 0
-            ? "Geen rondje zonder overlap binnen de tolerantie gevonden. "
-            : "Geen rondje binnen de tolerantie en maximaal 35% overlap gevonden. ") +
+            ? "Geen rondje gevonden dat nergens over hetzelfde pad terugloopt. "
+            : "Geen passend rondje gevonden. ") +
             "Probeer een grotere tolerantie, zoekstraal of afstand.", "error");
         return;
       }
@@ -2969,7 +3082,7 @@
       currentRoutes = [];
       originalRoutes = [];
       routeEditHistories = [];
-      editActionsElement.classList.add("hidden");
+      editAdvancedElement.classList.add("hidden");
       if (clearClick) {
         if (searchMarker) map.removeLayer(searchMarker);
         if (endSearchMarker) map.removeLayer(endSearchMarker);
@@ -3081,28 +3194,14 @@
     function handleMapClick(event) {
       if (!appReady) return;
       switch (appState.interaction) {
-        case INTERACTION.EDIT_SOURCE: {
-          const route = currentRoutes[selectedRouteIndex];
-          const edgeIndex = route
-            ? findNearestRouteEdgeIndex(route, event.latlng, 35)
-            : null;
-          if (edgeIndex !== null) selectEditSource(edgeIndex, event.latlng);
-          else editHintElement.textContent =
-            "Tik dichter bij de gekleurde route om een onderdeel te kiezen.";
-          return;
-        }
         case INTERACTION.EDIT_TARGET: {
-          const target = findNearestEditableBaseEdge(event.latlng, 35);
-          if (target) {
-            showEditTarget(target.baseId);
-            previewRouteDetour(target);
-          } else {
-            editHintElement.textContent =
-              "Tik dichter bij het pad waar de route langs moet lopen.";
-          }
+          chooseEditTarget(event.latlng);
           return;
         }
-        case INTERACTION.EDIT_PREVIEW:
+        case INTERACTION.EDIT_PREVIEW: {
+          chooseEditTarget(event.latlng);
+          return;
+        }
         case INTERACTION.SEARCHING:
           return;
         case INTERACTION.PICK_A:
@@ -3312,6 +3411,7 @@
         markerZoomAnimation: false
       }).setView([52.077, 5.178], 14);
       L.control.zoom({ position: "topright" }).addTo(map);
+      editLayerGroup = L.layerGroup().addTo(map);
 
       let osmTileErrors = 0;
       const basemap = L.tileLayer(
@@ -3387,6 +3487,9 @@
     editRouteButton.addEventListener("click", () => {
       if (isEditingRoute()) endEditMode();
       else beginEditMode();
+    });
+    editAdvancedElement.addEventListener("toggle", () => {
+      if (!editAdvancedElement.open && isEditingRoute()) endEditMode();
     });
     confirmEditButton.addEventListener("click", confirmEditPreview);
     cancelEditButton.addEventListener("click", cancelEditPreview);
